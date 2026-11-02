@@ -16,8 +16,10 @@ export async function loginUser(payload) {
 }
 
 export async function verifyRegisterToken({ token, purpose }) {
-  const response = await apiPublic.post('/auth/register-verification', null, {
-    params: { token, purpose },
-  });
+  const response = await apiPublic.post(
+    '/auth/register-verification',
+    {},
+    { params: { token, purpose } },
+  );
   return response.data;
 }
