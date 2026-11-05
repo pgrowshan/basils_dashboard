@@ -291,6 +291,7 @@ export default function OrdersPage() {
                         <p className="mt-0.5 text-[12px] text-[#8A97A8]">
                           {`${itemCount(order)} ${itemCount(order) === 1 ? 'item' : 'items'} · ${open ? 'Hide' : 'Details'}`}
                           {order.promoCode ? ` · ${order.promoCode}` : ''}
+                          {Number(order.rewardsSpent) > 0 ? ` · ${order.rewardsSpent} pts` : ''}
                         </p>
                       </button>
                       {open && (
@@ -302,13 +303,21 @@ export default function OrdersPage() {
                           ))}
                           <div className="mt-2 space-y-1 rounded-xl bg-[#F7F4EE] px-3 py-2.5 text-[12px]">
                             <p className="flex justify-between gap-4"><span>Subtotal</span><span className="tabular-nums">{money(order.subtotal)}</span></p>
-                            {order.promoCode || Number(order.discount) > 0 ? (
+                            {order.promoCode || Number(order.discount) - Number(order.rewardsDiscount || 0) > 0 ? (
                               <p className="flex justify-between gap-4 text-[#3E5A30]">
                                 <span>Promo {order.promoCode || ''}</span>
-                                <span className="tabular-nums">−{money(order.discount)}</span>
+                                <span className="tabular-nums">−{money(Number(order.discount || 0) - Number(order.rewardsDiscount || 0))}</span>
                               </p>
                             ) : (
                               <p className="flex justify-between gap-4 text-[#8A97A8]"><span>Promo</span><span>None</span></p>
+                            )}
+                            {Number(order.rewardsDiscount) > 0 ? (
+                              <p className="flex justify-between gap-4 text-[#3E5A30]">
+                                <span>Rewards {order.rewardsSpent} pts</span>
+                                <span className="tabular-nums">−{money(order.rewardsDiscount)}</span>
+                              </p>
+                            ) : (
+                              <p className="flex justify-between gap-4 text-[#8A97A8]"><span>Rewards</span><span>None</span></p>
                             )}
                             <p className="flex justify-between gap-4"><span>Shipping</span><span className="tabular-nums">{money(order.shippingCost)}</span></p>
                             <p className="flex justify-between gap-4"><span>Tax</span><span className="tabular-nums">{money(order.tax)}</span></p>
