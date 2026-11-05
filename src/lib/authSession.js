@@ -2,6 +2,20 @@ const TOKEN_KEY = 'dashboardAccessToken';
 const REFRESH_KEY = 'dashboardRefreshToken';
 const USER_KEY = 'dashboardUser';
 
+let redirectingToLogin = false;
+
+function readJwtPayload(token) {
+  try {
+    const payload = String(token || '').split('.')[1];
+    if (!payload) return null;
+    const normalized = payload.replace(/-/g, '+').replace(/_/g, '/');
+    const padded = normalized.padEnd(Math.ceil(normalized.length / 4) * 4, '=');
+    return JSON.parse(atob(padded));
+  } catch {
+    return null;
+  }
+}
+
 function writeSharedCookie(name, value, days = 7) {
   const expires = new Date(Date.now() + days * 864e5).toUTCString();
   document.cookie = `${name}=${encodeURIComponent(value)}; path=/; expires=${expires}; SameSite=Lax`;
@@ -9,6 +23,13 @@ function writeSharedCookie(name, value, days = 7) {
 
 export function getAccessToken() {
   return localStorage.getItem(TOKEN_KEY);
+}
+
+export function isAccessTokenValid(token = getAccessToken()) {
+  if (!token) return false;
+  const payload = readJwtPayload(token);
+  if (!payload?.exp) return false;
+  return payload.exp * 1000 > Date.now() + 1000;
 }
 
 export function getStoredUser() {
@@ -41,4 +62,13 @@ export function clearAuthSession() {
     document.cookie = `${name}=; path=/; max-age=0`;
   });
   window.dispatchEvent(new Event('auth-change'));
+}
+
+export function endSessionAndRedirectToLogin() {
+  clearAuthSession();
+  if (typeof window === 'undefined') return;
+  const onLogin = window.location.pathname === '/login';
+  if (onLogin || redirectingToLogin) return;
+  redirectingToLogin = true;
+  window.location.assign('/login');
 }

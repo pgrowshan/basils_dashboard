@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getAccessToken } from './authSession.js';
+import { endSessionAndRedirectToLogin, getAccessToken, isAccessTokenValid } from './authSession.js';
 
 const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api/v1';
 
@@ -21,6 +21,10 @@ export const apiPrivate = axios.create({
 
 apiPrivate.interceptors.request.use((config) => {
   const token = getAccessToken();
+  if (token && !isAccessTokenValid(token)) {
+    endSessionAndRedirectToLogin();
+    return Promise.reject(new Error('Session expired'));
+  }
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -29,3 +33,13 @@ apiPrivate.interceptors.request.use((config) => {
   }
   return config;
 });
+
+apiPrivate.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      endSessionAndRedirectToLogin();
+    }
+    return Promise.reject(error);
+  },
+);

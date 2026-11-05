@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Navigate, NavLink, Outlet, useLocation } from 'react-router-dom';
-import { clearAuthSession, getAccessToken, getStoredUser } from '../lib/authSession.js';
+import { clearAuthSession, getStoredUser, isAccessTokenValid } from '../lib/authSession.js';
 
 function Icon({ name }) {
   const icons = {
@@ -79,12 +79,20 @@ function Sidebar({ onNavigate, user }) {
 }
 
 export default function AdminLayout() {
-  const user = getStoredUser();
   const location = useLocation();
   const [open, setOpen] = useState(false);
+  const [, setAuthTick] = useState(0);
+  const user = getStoredUser();
+  const signedIn = isAccessTokenValid() && user?.role === 'admin';
   const current = LINKS.find((link) =>
     link.end ? location.pathname === link.to : location.pathname.startsWith(link.to),
   );
+
+  useEffect(() => {
+    const sync = () => setAuthTick((tick) => tick + 1);
+    window.addEventListener('auth-change', sync);
+    return () => window.removeEventListener('auth-change', sync);
+  }, []);
 
   useEffect(() => {
     setOpen(false);
@@ -97,8 +105,7 @@ export default function AdminLayout() {
     };
   }, [open]);
 
-  if (!getAccessToken() || !user) return <Navigate to="/login" replace />;
-  if (user.role !== 'admin') return <Navigate to="/login" replace />;
+  if (!signedIn) return <Navigate to="/login" replace />;
 
   const logout = () => {
     clearAuthSession();

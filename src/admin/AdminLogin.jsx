@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLogin } from '../hooks/auth/useLogin.js';
-import { clearAuthSession, getAccessToken, getStoredUser, saveAuthSession } from '../lib/authSession.js';
+import { clearAuthSession, getAccessToken, getStoredUser, isAccessTokenValid, saveAuthSession } from '../lib/authSession.js';
 import { getApiErrorMessage } from '../lib/getApiErrorMessage.js';
 import { Button, Field, Input, StatusNote } from './ui.jsx';
 
@@ -16,8 +16,12 @@ export default function AdminLogin() {
 
   useEffect(() => {
     const user = getStoredUser();
-    if (getAccessToken() && user?.role === 'admin') {
+    if (isAccessTokenValid() && user?.role === 'admin') {
       redirectToDashboard();
+      return;
+    }
+    if (getAccessToken() || user) {
+      clearAuthSession();
     }
   }, []);
 
