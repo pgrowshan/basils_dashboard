@@ -43,8 +43,8 @@ const LINKS = [
 function Sidebar({ onNavigate, user }) {
   return (
     <div className="flex h-full flex-col">
-      <div className="border-b border-white/10 px-5 py-5">
-        <p className="font-['Circe'] text-[10px] tracking-[0.2em] text-white/60 uppercase">Basil's Bakery</p>
+      <div className="border-b border-white/15 px-5 py-5">
+        <p className="font-['Circe'] text-[10px] tracking-[0.2em] text-[#F8ECB7] uppercase">Basil's Bakery</p>
         <p className="mt-1 font-gelica text-2xl text-white">Admin</p>
       </div>
 
@@ -59,8 +59,8 @@ function Sidebar({ onNavigate, user }) {
               [
                 'flex items-center gap-3 rounded-xl px-3 py-2.5 font-["Circe"] text-sm font-medium transition',
                 isActive
-                  ? 'bg-white text-[#1A2744] shadow-sm'
-                  : 'text-white/80 hover:bg-white/10 hover:text-white',
+                  ? 'bg-white text-[#4372B8] shadow-sm'
+                  : 'text-white/85 hover:bg-white/15 hover:text-white',
               ].join(' ')
             }
           >
@@ -70,9 +70,9 @@ function Sidebar({ onNavigate, user }) {
         ))}
       </nav>
 
-      <div className="border-t border-white/10 px-5 py-4">
-        <p className="truncate font-['Circe'] text-xs text-white/70">{user.email}</p>
-        <p className="mt-0.5 font-['Circe'] text-[11px] text-white/40">Administrator</p>
+      <div className="border-t border-white/15 px-5 py-4">
+        <p className="truncate font-['Circe'] text-xs text-white/80">{user.email}</p>
+        <p className="mt-0.5 font-['Circe'] text-[11px] text-[#F8ECB7]/80">Administrator</p>
       </div>
     </div>
   );
@@ -107,7 +107,7 @@ export default function AdminLayout() {
 
   return (
     <div className="min-h-screen bg-[#F4F1EA] text-[#1A2744] lg:pl-[260px]">
-      <aside className="fixed inset-y-0 left-0 z-40 hidden w-[260px] bg-[#1A2744] lg:block">
+      <aside className="fixed inset-y-0 left-0 z-40 hidden w-[260px] bg-[#4372B8] lg:block">
         <Sidebar user={user} />
       </aside>
 
@@ -119,7 +119,7 @@ export default function AdminLayout() {
             className="absolute inset-0 bg-black/45"
             onClick={() => setOpen(false)}
           />
-          <aside className="relative h-full w-[260px] bg-[#1A2744] shadow-2xl">
+          <aside className="relative h-full w-[260px] bg-[#4372B8] shadow-2xl">
             <Sidebar user={user} onNavigate={() => setOpen(false)} />
           </aside>
         </div>
