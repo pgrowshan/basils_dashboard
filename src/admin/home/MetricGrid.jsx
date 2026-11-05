@@ -24,39 +24,57 @@ const ICONS = {
   ),
 };
 
+const TONES = {
+  totalRevenue: 'bg-[#1A2744] text-white',
+  totalOrders: 'bg-[#E8F0FA] text-[#4372B8]',
+  pendingOrders: 'bg-[#FFF3D6] text-[#8A6D1B]',
+  completedOrders: 'bg-[#E8F4E6] text-[#3E5A30]',
+  totalUsers: 'bg-[#EEF1F5] text-[#1A2744]',
+  newSignups: 'bg-[#E8F0FA] text-[#4372B8]',
+  activeUsers: 'bg-[#E8F4E6] text-[#3E5A30]',
+};
+
 function Change({ change }) {
   const tone =
     change.direction === 'up'
-      ? 'bg-[#E8F4E6] text-[#3E5A30]'
+      ? 'text-[#3E5A30]'
       : change.direction === 'down'
-        ? 'bg-red-50 text-red-600'
-        : 'bg-[#EEF1F5] text-[#5C6B82]';
+        ? 'text-red-600'
+        : 'text-[#7A8BA3]';
   const arrow = change.direction === 'down' ? '↓' : change.direction === 'up' ? '↑' : '→';
 
   return (
-    <div className="mt-3 flex flex-wrap items-center gap-2">
-      <p className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 font-['Circe'] text-[11px] font-semibold ${tone}`}>
+    <p className="mt-3 flex flex-wrap items-center gap-x-1.5 font-['Circe'] text-[12px] leading-none">
+      <span className={`font-semibold tabular-nums ${tone}`}>
         {arrow} {change.percent.toFixed(1)}%
-      </p>
-      <p className="font-['Circe'] text-[11px] text-[#7A8BA3]">{change.label}</p>
-    </div>
+      </span>
+      <span className="text-[#8A97A8]">vs prior period</span>
+    </p>
   );
 }
 
-function MetricCardView({ card }) {
+function MetricCardView({ card, featured = false }) {
   return (
-    <article className="rounded-2xl border border-[#E6E1D6] bg-white p-4 shadow-[0_8px_30px_rgba(26,39,68,0.04)] sm:p-5">
-      <div className="flex items-start justify-between gap-3">
-        <p className="font-['Circe'] text-[11px] font-semibold tracking-[0.12em] text-[#7A8BA3] uppercase">
-          {card.label}
-        </p>
-        <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-[#E8F0FA] text-[#4372B8]">
+    <article
+      className={[
+        'rounded-2xl border border-[#E7E2D6] bg-white p-5 shadow-[0_10px_30px_rgba(26,39,68,0.035)] transition hover:border-[#D9D3C6]',
+        featured ? 'sm:col-span-2' : '',
+      ].join(' ')}
+    >
+      <div className="flex items-center gap-3">
+        <span className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${TONES[card.id]}`}>
           <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
             {ICONS[card.id]}
           </svg>
         </span>
+        <p className="font-['Circe'] text-[13px] font-medium text-[#5C6B82]">{card.label}</p>
       </div>
-      <p className="mt-3 font-gelica text-[28px] leading-none text-[#1A2744]">
+      <p
+        className={[
+          'mt-4 font-gelica leading-none tracking-tight text-[#1A2744] tabular-nums',
+          featured ? 'text-[36px] sm:text-[40px]' : 'text-[30px]',
+        ].join(' ')}
+      >
         {formatMetric(card.value, card.format)}
       </p>
       <Change change={card.change} />
@@ -65,31 +83,15 @@ function MetricCardView({ card }) {
 }
 
 export function MetricGrid({ metrics }) {
-  const orderCards = [metrics.totalOrders, metrics.totalRevenue, metrics.pendingOrders, metrics.completedOrders];
-  const userCards = [metrics.totalUsers, metrics.newSignups, metrics.activeUsers];
-
   return (
-    <div className="grid gap-5">
-      <section>
-        <p className="mb-3 font-['Circe'] text-[11px] font-semibold tracking-[0.16em] text-[#7A8BA3] uppercase">
-          Order statistics
-        </p>
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
-          {orderCards.map((card) => (
-            <MetricCardView key={card.id} card={card} />
-          ))}
-        </div>
-      </section>
-      <section>
-        <p className="mb-3 font-['Circe'] text-[11px] font-semibold tracking-[0.16em] text-[#7A8BA3] uppercase">
-          User statistics
-        </p>
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-          {userCards.map((card) => (
-            <MetricCardView key={card.id} card={card} />
-          ))}
-        </div>
-      </section>
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <MetricCardView card={metrics.totalRevenue} featured />
+      <MetricCardView card={metrics.totalOrders} />
+      <MetricCardView card={metrics.pendingOrders} />
+      <MetricCardView card={metrics.completedOrders} />
+      <MetricCardView card={metrics.totalUsers} />
+      <MetricCardView card={metrics.newSignups} />
+      <MetricCardView card={metrics.activeUsers} />
     </div>
   );
 }

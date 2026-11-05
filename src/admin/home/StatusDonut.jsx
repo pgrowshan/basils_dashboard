@@ -1,30 +1,41 @@
 import { Card } from '../ui.jsx';
 
-const RADIUS = 62;
+const RADIUS = 58;
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
+
+const SHORT_STATUS = {
+  'Awaiting eTransfer': 'eTransfer',
+  'Awaiting Payment': 'Payment',
+  Paid: 'Paid',
+  Shipped: 'Shipped',
+  Delivered: 'Delivered',
+  Cancelled: 'Cancelled',
+};
 
 export function StatusDonut({ slices }) {
   const total = slices.reduce((sum, slice) => sum + slice.count, 0);
   const ringTotal = total || 1;
   let offset = 0;
-  const rings = slices.map((slice) => {
-    const length = (slice.count / ringTotal) * CIRCUMFERENCE;
-    const item = { ...slice, length, offset };
-    offset += length;
-    return item;
-  });
+  const rings = slices
+    .filter((slice) => slice.count > 0)
+    .map((slice) => {
+      const length = (slice.count / ringTotal) * CIRCUMFERENCE;
+      const item = { ...slice, length, offset };
+      offset += length;
+      return item;
+    });
 
   return (
-    <Card className="h-full">
-      <p className="font-['Circe'] text-[11px] font-semibold tracking-[0.16em] text-[#7A8BA3] uppercase">
-        Order status
+    <Card className="flex h-full flex-col">
+      <p className="font-['Circe'] text-[11px] font-semibold tracking-[0.16em] text-[#8A97A8] uppercase">
+        Fulfillment
       </p>
-      <h3 className="mt-1 font-gelica text-xl text-[#1A2744]">Distribution</h3>
+      <h3 className="mt-1 font-gelica text-[22px] text-[#1A2744]">Order status</h3>
 
-      <div className="mt-5 flex flex-col items-center gap-6 sm:flex-row sm:items-center">
-        <div className="relative h-44 w-44 shrink-0">
+      <div className="mt-5 flex flex-1 flex-col items-center gap-6">
+        <div className="relative h-[148px] w-[148px]">
           <svg viewBox="0 0 160 160" className="h-full w-full -rotate-90">
-            <circle cx="80" cy="80" r={RADIUS} fill="none" stroke="#F0EBE0" strokeWidth="16" />
+            <circle cx="80" cy="80" r={RADIUS} fill="none" stroke="#F1ECE3" strokeWidth="18" />
             {rings.map((ring) => (
               <circle
                 key={ring.status}
@@ -33,29 +44,40 @@ export function StatusDonut({ slices }) {
                 r={RADIUS}
                 fill="none"
                 stroke={ring.color}
-                strokeWidth="16"
+                strokeWidth="18"
                 strokeDasharray={`${ring.length} ${CIRCUMFERENCE - ring.length}`}
                 strokeDashoffset={-ring.offset}
-                strokeLinecap="butt"
               />
             ))}
           </svg>
           <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <p className="font-gelica text-2xl text-[#1A2744]">{total}</p>
-            <p className="font-['Circe'] text-[11px] text-[#7A8BA3]">orders</p>
+            <p className="font-gelica text-[28px] leading-none tabular-nums text-[#1A2744]">{total}</p>
+            <p className="mt-1 font-['Circe'] text-[11px] tracking-[0.08em] text-[#8A97A8] uppercase">Total</p>
           </div>
         </div>
 
-        <ul className="grid w-full gap-2">
-          {slices.map((slice) => (
-            <li key={slice.status} className="flex items-center justify-between gap-3 font-['Circe'] text-sm">
-              <span className="inline-flex min-w-0 items-center gap-2 text-[#3E4C63]">
-                <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ backgroundColor: slice.color }} />
-                <span className="truncate">{slice.status}</span>
-              </span>
-              <span className="shrink-0 font-semibold text-[#1A2744]">{slice.count}</span>
-            </li>
-          ))}
+        <ul className="grid w-full grid-cols-2 gap-x-4 gap-y-2.5">
+          {slices.map((slice) => {
+            const share = total ? Math.round((slice.count / total) * 100) : 0;
+            const muted = slice.count === 0;
+            return (
+              <li key={slice.status} className="flex items-center justify-between gap-2">
+                <span className="inline-flex min-w-0 items-center gap-2">
+                  <span
+                    className="h-2 w-2 shrink-0 rounded-full"
+                    style={{ backgroundColor: slice.color, opacity: muted ? 0.35 : 1 }}
+                  />
+                  <span className={`truncate font-['Circe'] text-[12px] ${muted ? 'text-[#B3BCC8]' : 'text-[#3E4C63]'}`}>
+                    {SHORT_STATUS[slice.status] || slice.status}
+                  </span>
+                </span>
+                <span className={`shrink-0 font-['Circe'] text-[12px] tabular-nums ${muted ? 'text-[#B3BCC8]' : 'text-[#1A2744]'}`}>
+                  <span className="font-semibold">{slice.count}</span>
+                  <span className="ml-1 text-[#8A97A8]">{share}%</span>
+                </span>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </Card>
