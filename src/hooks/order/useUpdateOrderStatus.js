@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updateOrderStatus } from '../../api/order.api.js';
+import { dashboardQueryKeys } from '../dashboard/useDashboardOverview.js';
 import { orderQueryKeys } from './useGetOrders.js';
 
 export function useUpdateOrderStatus() {
@@ -8,7 +9,10 @@ export function useUpdateOrderStatus() {
   return useMutation({
     mutationFn: ({ id, status }) => updateOrderStatus(id, status),
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: orderQueryKeys.all });
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: orderQueryKeys.all }),
+        queryClient.invalidateQueries({ queryKey: dashboardQueryKeys.overview }),
+      ]);
     },
   });
 }
