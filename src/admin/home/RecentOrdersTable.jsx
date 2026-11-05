@@ -39,19 +39,27 @@ export function RecentOrdersTable({ orders }) {
             </tr>
           </thead>
           <tbody className="divide-y divide-[#F0EBE0] font-['Circe'] text-sm">
-            {orders.map((order) => (
-              <tr key={order.id} className="bg-white hover:bg-[#FBF9F4]">
-                <td className="px-4 py-3.5 font-semibold text-[#1A2744] sm:px-6">{order.orderNumber}</td>
-                <td className="px-4 py-3.5 text-[#3E4C63] sm:px-6">{order.customerName}</td>
-                <td className="px-4 py-3.5 text-[#5C6B82] sm:px-6">{formatDate(order.date)}</td>
-                <td className="px-4 py-3.5 sm:px-6">
-                  <Badge tone={statusTone(order.status)}>{order.status}</Badge>
-                </td>
-                <td className="px-4 py-3.5 text-right font-semibold text-[#1A2744] sm:px-6">
-                  {formatMoney(order.total)}
+            {orders.length === 0 ? (
+              <tr>
+                <td colSpan={5} className="px-4 py-8 text-center text-[#5C6B82] sm:px-6">
+                  No orders yet.
                 </td>
               </tr>
-            ))}
+            ) : (
+              orders.map((order) => (
+                <tr key={order.id} className="bg-white hover:bg-[#FBF9F4]">
+                  <td className="px-4 py-3.5 font-semibold text-[#1A2744] sm:px-6">{order.orderNumber}</td>
+                  <td className="px-4 py-3.5 text-[#3E4C63] sm:px-6">{order.customerName}</td>
+                  <td className="px-4 py-3.5 text-[#5C6B82] sm:px-6">{formatDate(order.date)}</td>
+                  <td className="px-4 py-3.5 sm:px-6">
+                    <Badge tone={statusTone(order.status)}>{order.status}</Badge>
+                  </td>
+                  <td className="px-4 py-3.5 text-right font-semibold text-[#1A2744] sm:px-6">
+                    {formatMoney(order.total)}
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>

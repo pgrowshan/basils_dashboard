@@ -4,10 +4,11 @@ const RADIUS = 62;
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
 
 export function StatusDonut({ slices }) {
-  const total = slices.reduce((sum, slice) => sum + slice.count, 0) || 1;
+  const total = slices.reduce((sum, slice) => sum + slice.count, 0);
+  const ringTotal = total || 1;
   let offset = 0;
   const rings = slices.map((slice) => {
-    const length = (slice.count / total) * CIRCUMFERENCE;
+    const length = (slice.count / ringTotal) * CIRCUMFERENCE;
     const item = { ...slice, length, offset };
     offset += length;
     return item;
