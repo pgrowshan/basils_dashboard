@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLogin } from '../hooks/auth/useLogin.js';
 import { clearAuthSession, getAccessToken, getStoredUser, saveAuthSession } from '../lib/authSession.js';
 import { getApiErrorMessage } from '../lib/getApiErrorMessage.js';
+import { Button, Field, Input, StatusNote } from './ui.jsx';
 
 function redirectToDashboard() {
   window.location.assign('/categories');
@@ -45,39 +46,29 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#4372B8] px-4">
-      <form onSubmit={handleSubmit} className="w-full max-w-md bg-[#FFFDF8] p-8">
-        <h1 className="font-gelica text-3xl text-[#1A2744]">Admin login</h1>
-        <p className="mt-2 font-['Circe'] text-sm text-[#5C6B82]">Sign in with an admin account to add categories and products.</p>
-        <input
-          type="email"
-          required
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-          placeholder="Email"
-          className="mt-6 w-full border border-[#D7DEE8] px-3 py-3 font-['Circe']"
-        />
-        <input
-          type="password"
-          required
-          minLength={6}
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-          placeholder="Password"
-          className="mt-3 w-full border border-[#D7DEE8] px-3 py-3 font-['Circe']"
-        />
+    <div className="flex min-h-screen items-center justify-center bg-[#4372B8] px-4 py-10">
+      <form onSubmit={handleSubmit} className="w-full max-w-md rounded-2xl bg-[#FFFDF8] p-6 shadow-xl sm:p-8">
+        <p className="font-['Circe'] text-[11px] font-semibold tracking-[0.18em] text-[#4372B8] uppercase">Basil's Bakery</p>
+        <h1 className="mt-2 font-gelica text-3xl text-[#1A2744]">Admin login</h1>
+        <p className="mt-2 font-['Circe'] text-sm leading-relaxed text-[#5C6B82]">
+          Sign in with an admin account to manage the shop.
+        </p>
+        <div className="mt-6 grid gap-4">
+          <Field label="Email">
+            <Input type="email" required value={email} onChange={(event) => setEmail(event.target.value)} placeholder="admin@email.com" />
+          </Field>
+          <Field label="Password">
+            <Input type="password" required minLength={6} value={password} onChange={(event) => setPassword(event.target.value)} placeholder="Password" />
+          </Field>
+        </div>
         {(formError || loginMutation.isError) && (
-          <p className="mt-3 font-['Circe'] text-sm text-red-600">
-            {formError || getApiErrorMessage(loginMutation.error)}
-          </p>
+          <div className="mt-3">
+            <StatusNote tone="danger">{formError || getApiErrorMessage(loginMutation.error)}</StatusNote>
+          </div>
         )}
-        <button
-          type="submit"
-          disabled={loginMutation.isPending}
-          className="mt-5 w-full cursor-pointer bg-[#0F172A] py-3 font-['Circe'] text-white disabled:opacity-50"
-        >
+        <Button type="submit" disabled={loginMutation.isPending} className="mt-5 w-full">
           {loginMutation.isPending ? 'Signing in...' : 'Sign in'}
-        </button>
+        </Button>
       </form>
     </div>
   );

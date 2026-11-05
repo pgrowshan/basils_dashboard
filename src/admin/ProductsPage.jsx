@@ -3,6 +3,7 @@ import { useGetCategories } from '../hooks/category/useGetCategories.js';
 import { useCreateProduct } from '../hooks/product/useCreateProduct.js';
 import { useGetProducts } from '../hooks/product/useGetProducts.js';
 import { getApiErrorMessage } from '../lib/getApiErrorMessage.js';
+import { Button, Card, EmptyState, Field, Input, PageHeader, Select, StatusNote, Textarea } from './ui.jsx';
 
 const EMPTY = {
   categoryId: '',
@@ -55,43 +56,75 @@ export default function ProductsPage() {
   };
 
   return (
-    <section>
-      <h2 className="font-gelica text-3xl">Products</h2>
-      <form onSubmit={handleSubmit} className="mt-5 grid gap-3 bg-white p-5">
-        <select required name="categoryId" value={fields.categoryId} onChange={setField} className="border border-[#D7DEE8] px-3 py-2 font-['Circe']">
-          <option value="">Choose a category</option>
-          {categories.map((category) => (
-            <option key={category._id} value={category._id}>{category.title}</option>
-          ))}
-        </select>
-        <input required name="title" value={fields.title} onChange={setField} placeholder="Title" className="border border-[#D7DEE8] px-3 py-2 font-['Circe']" />
-        <input required name="subTitle" value={fields.subTitle} onChange={setField} placeholder="Subtitle" className="border border-[#D7DEE8] px-3 py-2 font-['Circe']" />
-        <textarea required name="description" value={fields.description} onChange={setField} placeholder="Description" className="min-h-24 border border-[#D7DEE8] px-3 py-2 font-['Circe']" />
-        <input required name="price" type="number" min="0" step="0.01" value={fields.price} onChange={setField} placeholder="Price" className="border border-[#D7DEE8] px-3 py-2 font-['Circe']" />
-        <label className="font-['Circe'] text-sm">Main image<input required type="file" accept="image/*" onChange={(event) => setFiles((current) => ({ ...current, image: event.target.files?.[0] || null }))} /></label>
-        <label className="font-['Circe'] text-sm">How much to take<input required name="howMuchToTakeText" value={fields.howMuchToTakeText} onChange={setField} placeholder="Text" className="mt-1 block w-full border border-[#D7DEE8] px-3 py-2" /><input required type="file" accept="image/*" onChange={(event) => setFiles((current) => ({ ...current, howMuchToTakeImage: event.target.files?.[0] || null }))} /></label>
-        <label className="font-['Circe'] text-sm">Where to use<input required name="whereToTakeText" value={fields.whereToTakeText} onChange={setField} placeholder="Text" className="mt-1 block w-full border border-[#D7DEE8] px-3 py-2" /><input required type="file" accept="image/*" onChange={(event) => setFiles((current) => ({ ...current, whereToTakeImage: event.target.files?.[0] || null }))} /></label>
-        <label className="font-['Circe'] text-sm">Ingredients<input required name="ingredientsText" value={fields.ingredientsText} onChange={setField} placeholder="Text" className="mt-1 block w-full border border-[#D7DEE8] px-3 py-2" /><input required type="file" accept="image/*" onChange={(event) => setFiles((current) => ({ ...current, ingredientsImage: event.target.files?.[0] || null }))} /></label>
-        {createProduct.isError && <p className="font-['Circe'] text-sm text-red-600">{getApiErrorMessage(createProduct.error)}</p>}
-        {createProduct.isSuccess && <p className="font-['Circe'] text-sm text-[#3E5A30]">Product created. It is now on the shop.</p>}
-        <button type="submit" disabled={createProduct.isPending || categories.length === 0} className="w-fit cursor-pointer bg-[#4372B8] px-4 py-2 font-['Circe'] text-white disabled:opacity-50">
-          {createProduct.isPending ? 'Saving...' : 'Add product'}
-        </button>
-      </form>
+    <section className="grid gap-5">
+      <PageHeader
+        eyebrow="Catalog"
+        title="Products"
+        description="New bars appear on the shop after you save them."
+      />
 
-      <div className="mt-6 grid gap-3">
-        {isLoading && <p className="font-['Circe'] text-sm">Loading products...</p>}
+      <Card>
+        <form onSubmit={handleSubmit} className="grid gap-4">
+          <div className="grid gap-4 sm:grid-cols-2">
+            <Field label="Category">
+              <Select required name="categoryId" value={fields.categoryId} onChange={setField}>
+                <option value="">Choose a category</option>
+                {categories.map((category) => (
+                  <option key={category._id} value={category._id}>{category.title}</option>
+                ))}
+              </Select>
+            </Field>
+            <Field label="Price">
+              <Input required name="price" type="number" min="0" step="0.01" value={fields.price} onChange={setField} placeholder="65.00" />
+            </Field>
+          </div>
+          <Field label="Title">
+            <Input required name="title" value={fields.title} onChange={setField} placeholder="3g Blueberry Dark Chocolate" />
+          </Field>
+          <Field label="Subtitle">
+            <Input required name="subTitle" value={fields.subTitle} onChange={setField} placeholder="3g bar" />
+          </Field>
+          <Field label="Description">
+            <Textarea required name="description" value={fields.description} onChange={setField} placeholder="What makes this bar special" />
+          </Field>
+          <Field label="Main image">
+            <Input required type="file" accept="image/*" onChange={(event) => setFiles((current) => ({ ...current, image: event.target.files?.[0] || null }))} />
+          </Field>
+          <div className="grid gap-4 sm:grid-cols-3">
+            <Field label="How much to take">
+              <Input required name="howMuchToTakeText" value={fields.howMuchToTakeText} onChange={setField} placeholder="Text" />
+              <Input required type="file" accept="image/*" className="mt-2" onChange={(event) => setFiles((current) => ({ ...current, howMuchToTakeImage: event.target.files?.[0] || null }))} />
+            </Field>
+            <Field label="Where to use">
+              <Input required name="whereToTakeText" value={fields.whereToTakeText} onChange={setField} placeholder="Text" />
+              <Input required type="file" accept="image/*" className="mt-2" onChange={(event) => setFiles((current) => ({ ...current, whereToTakeImage: event.target.files?.[0] || null }))} />
+            </Field>
+            <Field label="Ingredients">
+              <Input required name="ingredientsText" value={fields.ingredientsText} onChange={setField} placeholder="Text" />
+              <Input required type="file" accept="image/*" className="mt-2" onChange={(event) => setFiles((current) => ({ ...current, ingredientsImage: event.target.files?.[0] || null }))} />
+            </Field>
+          </div>
+          {createProduct.isError && <StatusNote tone="danger">{getApiErrorMessage(createProduct.error)}</StatusNote>}
+          {createProduct.isSuccess && <StatusNote tone="success">Product created. It is now on the shop.</StatusNote>}
+          <Button type="submit" disabled={createProduct.isPending || categories.length === 0} className="w-full sm:w-fit">
+            {createProduct.isPending ? 'Saving...' : 'Add product'}
+          </Button>
+        </form>
+      </Card>
+
+      {isLoading && <StatusNote>Loading products...</StatusNote>}
+      <div className="grid gap-3">
         {products.map((product) => (
-          <article key={product._id} className="flex items-center gap-4 bg-white p-3">
-            {product.image?.[0]?.url && <img src={product.image[0].url} alt="" className="h-16 w-16 object-cover" />}
-            <div>
-              <p className="font-['Circe'] font-semibold">{product.title}</p>
+          <article key={product._id} className="flex items-center gap-4 rounded-2xl border border-[#E6E1D6] bg-white p-3 sm:p-4">
+            {product.image?.[0]?.url && <img src={product.image[0].url} alt="" className="h-14 w-14 shrink-0 rounded-xl object-cover sm:h-16 sm:w-16" />}
+            <div className="min-w-0">
+              <p className="truncate font-['Circe'] font-semibold">{product.title}</p>
               <p className="font-['Circe'] text-sm text-[#5C6B82]">${Number(product.price).toFixed(2)}</p>
             </div>
           </article>
         ))}
-        {!isLoading && products.length === 0 && <p className="font-['Circe'] text-sm text-[#5C6B82]">No products yet.</p>}
       </div>
+      {!isLoading && products.length === 0 && <EmptyState>No products yet.</EmptyState>}
     </section>
   );
 }

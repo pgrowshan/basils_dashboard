@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { apiPrivate } from '../lib/api-client.js';
 import { getApiErrorMessage } from '../lib/getApiErrorMessage.js';
+import { Badge, Button, Card, EmptyState, Field, Input, PageHeader, Select, StatusNote } from './ui.jsx';
 
 const promoKeys = ['GET_PROMOS'];
 
@@ -57,41 +58,62 @@ export default function PromosPage() {
   };
 
   return (
-    <section>
-      <h2 className="font-gelica text-3xl">Promo codes</h2>
-      <p className="mt-2 font-['Circe'] text-sm text-[#5C6B82]">Percent or fixed discounts. Customers apply the code at checkout.</p>
-      <form onSubmit={handleSubmit} className="mt-5 grid gap-3 bg-white p-5 md:grid-cols-2">
-        <input required value={form.code} onChange={(event) => setForm({ ...form, code: event.target.value })} placeholder="Code, for example WELCOME10" className="border border-[#D7DEE8] px-3 py-2 font-['Circe']" />
-        <select value={form.discountType} onChange={(event) => setForm({ ...form, discountType: event.target.value })} className="border border-[#D7DEE8] px-3 py-2 font-['Circe']">
-          <option value="percent">Percent off</option>
-          <option value="fixed">Fixed amount off</option>
-        </select>
-        <input required type="number" min="0.01" step="0.01" value={form.amount} onChange={(event) => setForm({ ...form, amount: event.target.value })} placeholder="Amount" className="border border-[#D7DEE8] px-3 py-2 font-['Circe']" />
-        <input type="number" min="0" step="0.01" value={form.minSubtotal} onChange={(event) => setForm({ ...form, minSubtotal: event.target.value })} placeholder="Minimum subtotal" className="border border-[#D7DEE8] px-3 py-2 font-['Circe']" />
-        {createPromo.isError && <p className="font-['Circe'] text-sm text-red-600 md:col-span-2">{getApiErrorMessage(createPromo.error)}</p>}
-        <button type="submit" disabled={createPromo.isPending} className="w-fit cursor-pointer bg-[#4372B8] px-4 py-2 font-['Circe'] text-white disabled:opacity-50">Add code</button>
-      </form>
+    <section className="grid gap-5">
+      <PageHeader
+        eyebrow="Marketing"
+        title="Promo codes"
+        description="Percent or fixed discounts. Customers apply the code at checkout."
+      />
 
-      <div className="mt-6 grid gap-3">
+      <Card>
+        <form onSubmit={handleSubmit} className="grid gap-4 sm:grid-cols-2">
+          <Field label="Code">
+            <Input required value={form.code} onChange={(event) => setForm({ ...form, code: event.target.value })} placeholder="WELCOME10" />
+          </Field>
+          <Field label="Discount type">
+            <Select value={form.discountType} onChange={(event) => setForm({ ...form, discountType: event.target.value })}>
+              <option value="percent">Percent off</option>
+              <option value="fixed">Fixed amount off</option>
+            </Select>
+          </Field>
+          <Field label="Amount">
+            <Input required type="number" min="0.01" step="0.01" value={form.amount} onChange={(event) => setForm({ ...form, amount: event.target.value })} placeholder="10" />
+          </Field>
+          <Field label="Minimum subtotal">
+            <Input type="number" min="0" step="0.01" value={form.minSubtotal} onChange={(event) => setForm({ ...form, minSubtotal: event.target.value })} placeholder="0" />
+          </Field>
+          {createPromo.isError && <div className="sm:col-span-2"><StatusNote tone="danger">{getApiErrorMessage(createPromo.error)}</StatusNote></div>}
+          <Button type="submit" disabled={createPromo.isPending} className="w-full sm:w-fit">
+            Add code
+          </Button>
+        </form>
+      </Card>
+
+      <div className="grid gap-3">
         {(promos.data || []).map((promo) => (
-          <article key={promo._id} className="flex flex-wrap items-center justify-between gap-3 bg-white p-4">
-            <div>
-              <p className="font-['Circe'] font-semibold">{promo.code}</p>
-              <p className="font-['Circe'] text-sm text-[#5C6B82]">
+          <article key={promo._id} className="flex flex-col gap-3 rounded-2xl border border-[#E6E1D6] bg-white p-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="min-w-0">
+              <div className="flex flex-wrap items-center gap-2">
+                <p className="font-['Circe'] font-semibold">{promo.code}</p>
+                <Badge tone={promo.active ? 'gold' : 'gray'}>{promo.active ? 'Active' : 'Off'}</Badge>
+              </div>
+              <p className="mt-1 font-['Circe'] text-sm text-[#5C6B82]">
                 {promo.discountType === 'percent' ? `${promo.amount}% off` : `$${Number(promo.amount).toFixed(2)} off`}
                 {promo.minSubtotal ? ` · minimum $${Number(promo.minSubtotal).toFixed(2)}` : ''}
               </p>
             </div>
             <div className="flex gap-2">
-              <button type="button" onClick={() => updatePromo.mutate({ id: promo._id, payload: { active: !promo.active } })} className="cursor-pointer border border-[#D7DEE8] px-3 py-2 font-['Circe'] text-sm">
+              <Button type="button" variant="secondary" onClick={() => updatePromo.mutate({ id: promo._id, payload: { active: !promo.active } })} className="flex-1 sm:flex-none">
                 {promo.active ? 'Turn off' : 'Turn on'}
-              </button>
-              <button type="button" onClick={() => deletePromo.mutate(promo._id)} className="cursor-pointer border border-red-200 px-3 py-2 font-['Circe'] text-sm text-red-600">Delete</button>
+              </Button>
+              <Button type="button" variant="danger" onClick={() => deletePromo.mutate(promo._id)} className="flex-1 sm:flex-none">
+                Delete
+              </Button>
             </div>
           </article>
         ))}
-        {promos.isSuccess && promos.data.length === 0 && <p className="font-['Circe'] text-sm text-[#5C6B82]">No promo codes yet.</p>}
       </div>
+      {promos.isSuccess && promos.data.length === 0 && <EmptyState>No promo codes yet.</EmptyState>}
     </section>
   );
 }
