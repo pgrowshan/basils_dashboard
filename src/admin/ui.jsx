@@ -58,16 +58,20 @@ export function Textarea(props) {
   return <textarea {...props} className={`${control} min-h-28 resize-y ${props.className || ''}`} />;
 }
 
-export function Button({ children, variant = 'primary', className = '', ...props }) {
+export function Button({ children, variant = 'primary', size = 'md', className = '', ...props }) {
   const styles = {
     primary: 'bg-[#4372B8] text-white hover:bg-[#355f98]',
     secondary: 'border border-[#D7DEE8] bg-white text-[#1A2744] hover:bg-[#F7F4EE]',
     danger: 'border border-red-200 bg-white text-red-600 hover:bg-red-50',
   };
+  const sizes = {
+    md: 'min-h-11 px-4 py-2.5 text-sm',
+    sm: 'min-h-9 px-3 py-1.5 text-xs',
+  };
   return (
     <button
       {...props}
-      className={`inline-flex min-h-11 cursor-pointer items-center justify-center rounded-xl px-4 py-2.5 font-['Circe'] text-sm font-semibold transition disabled:cursor-wait disabled:opacity-50 ${styles[variant]} ${className}`}
+      className={`inline-flex cursor-pointer items-center justify-center rounded-xl font-['Circe'] font-semibold transition disabled:cursor-wait disabled:opacity-50 ${styles[variant]} ${sizes[size] || sizes.md} ${className}`}
     >
       {children}
     </button>
