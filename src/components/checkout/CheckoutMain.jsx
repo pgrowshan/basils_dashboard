@@ -226,7 +226,7 @@ function CheckoutMain() {
 
           <button
             type="submit"
-            className="w-full cursor-pointer self-start bg-[#3E6EAE] px-12 py-3.5 text-center font-['Circe'] text-[15px] font-medium text-white transition-colors hover:bg-[#355f98] lg:w-fit"
+            className="w-full cursor-pointer self-start bg-[#3E6EAE] px-12 py-3.5 text-center font-circe text-[15px] font-medium text-white transition-colors hover:bg-[#355f98] lg:w-fit"
           >
             Continue to Payment
           </button>

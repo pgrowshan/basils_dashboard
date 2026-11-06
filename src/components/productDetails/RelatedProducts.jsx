@@ -20,10 +20,10 @@ export default function RelatedProducts() {
               <h3 className="mt-4 font-gelica text-[16px] font-semibold leading-snug text-[#141820] md:text-[18px]">
                 {product.name.replace(" Bar", "")}
               </h3>
-              <p className="mt-1.5 font-['Circe'] text-[11px] font-medium uppercase tracking-[0.14em] text-[#8A8F98]">
+              <p className="mt-1.5 font-circe text-[11px] font-medium uppercase tracking-[0.14em] text-[#8A8F98]">
                 {product.category}
               </p>
-              <p className="mt-1.5 font-['Circe'] text-[15px] font-semibold text-[#141820]">
+              <p className="mt-1.5 font-circe text-[15px] font-semibold text-[#141820]">
                 {formatPrice(product.price)}
               </p>
             </Link>

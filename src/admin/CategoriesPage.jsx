@@ -43,7 +43,7 @@ export default function CategoriesPage() {
           <Field label="Title color">
             <div className="flex items-center gap-3">
               <input type="color" value={categoryTitleColor} onChange={(event) => setCategoryTitleColor(event.target.value)} className="h-11 w-14 cursor-pointer rounded-xl border border-[#D7DEE8]" />
-              <span className="font-['Circe'] text-sm text-[#5C6B82]">{categoryTitleColor}</span>
+              <span className="font-circe text-sm text-[#5C6B82]">{categoryTitleColor}</span>
             </div>
           </Field>
           <Field label="Image" hint={image ? image.name : 'PNG or JPG'}>
@@ -63,8 +63,8 @@ export default function CategoriesPage() {
           <article key={category._id} className="flex items-center gap-4 rounded-2xl border border-[#E6E1D6] bg-white p-3 sm:p-4">
             {category.image?.url && <img src={category.image.url} alt="" className="h-14 w-14 shrink-0 rounded-xl object-cover sm:h-16 sm:w-16" />}
             <div className="min-w-0">
-              <p className="truncate font-['Circe'] font-semibold" style={{ color: category.categoryTitleColor }}>{category.title}</p>
-              <p className="truncate font-['Circe'] text-xs text-[#7A8BA3]">{category._id}</p>
+              <p className="truncate font-circe font-semibold" style={{ color: category.categoryTitleColor }}>{category.title}</p>
+              <p className="truncate font-circe text-xs text-[#7A8BA3]">{category._id}</p>
             </div>
           </article>
         ))}

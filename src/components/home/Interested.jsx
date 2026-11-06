@@ -74,7 +74,7 @@ function Interested() {
           <h2 className="font-gelica text-[32px] font-semibold leading-tight text-[#0F172A] sm:text-4xl md:text-[48px]">
             Interested in Microdosing?
           </h2>
-          <p className="mx-auto mt-4 max-w-xl font-['Circe'] text-[15px] leading-relaxed text-[#1E293B] sm:text-base md:text-[17px]">
+          <p className="mx-auto mt-4 max-w-xl font-circe text-[15px] leading-relaxed text-[#1E293B] sm:text-base md:text-[17px]">
             Our 3g bars are the perfect companion. 125mg × 24 pieces = 3g of dried psilocybe cubensis per bar
           </p>
         </div>
@@ -107,7 +107,7 @@ function Interested() {
 
           <Link
             to="/chocolates"
-            className="font-['Circe'] text-[15px] text-[#3b6eba] transition-colors hover:text-[#2f5a9e] sm:text-base"
+            className="font-circe text-[15px] text-[#3b6eba] transition-colors hover:text-[#2f5a9e] sm:text-base"
           >
             Shop All
           </Link>
@@ -129,13 +129,13 @@ function Interested() {
                 alt={product.name}
                 className="aspect-[375/417] h-auto w-full bg-white object-contain"
               />
-              <h3 className="mt-4 font-['Circe'] text-[16px] font-semibold leading-snug text-[#0F172A] sm:text-[17px]">
+              <h3 className="mt-4 font-circe text-[16px] font-semibold leading-snug text-[#0F172A] sm:text-[17px]">
                 {product.name}
               </h3>
-              <p className="mt-1 font-['Circe'] text-[11px] font-medium uppercase tracking-[0.16em] text-[#334155]">
+              <p className="mt-1 font-circe text-[11px] font-medium uppercase tracking-[0.16em] text-[#334155]">
                 Microdose
               </p>
-              <p className="mt-2 font-['Circe'] text-[16px] font-semibold text-[#0F172A]">
+              <p className="mt-2 font-circe text-[16px] font-semibold text-[#0F172A]">
                 $65.00
               </p>
             </Link>

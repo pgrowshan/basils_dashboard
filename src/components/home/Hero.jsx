@@ -18,7 +18,7 @@ function Hero() {
 
       <div className="absolute inset-x-0 top-0 z-10 mx-auto flex w-full max-w-7xl flex-col items-center px-5 pt-24 text-center sm:pt-28 md:px-12 md:pt-32 lg:inset-0 lg:justify-center lg:px-12 lg:pt-0 lg:items-start lg:text-left">
         <div className="w-full max-w-xl lg:max-w-2xl">
-          <p className="mb-3 hidden max-w-[506px] font-['Circe'] text-[18px] font-normal uppercase leading-normal text-[#FFFAF4] lg:block">
+          <p className="mb-3 hidden max-w-[506px] font-circe text-[18px] font-normal leading-normal text-[#FFFAF4] lg:block">
             Small Batch · hand crafted · decadent
           </p>
 
@@ -28,7 +28,7 @@ function Hero() {
             Soul is Here.
           </h1>
 
-          <p className="mx-auto mt-3 max-w-[20.5rem] font-['Circe'] text-[15px] font-normal leading-snug text-[#FFFAF4] sm:mt-4 sm:max-w-md sm:text-[18px] sm:leading-relaxed md:max-w-[34rem] md:text-[20px] lg:mx-0 lg:mt-4 lg:w-[546px] lg:max-w-none lg:text-[22px] lg:leading-normal">
+          <p className="mx-auto mt-3 max-w-[20.5rem] font-circe text-[15px] font-normal leading-snug text-[#FFFAF4] sm:mt-4 sm:max-w-md sm:text-[18px] sm:leading-relaxed md:max-w-[34rem] md:text-[20px] lg:mx-0 lg:mt-4 lg:w-[546px] lg:max-w-none lg:text-[22px] lg:leading-normal">
             Each bar is crafted to nourish both body and soul.
             Discover the difference that real ingredients and genuine care can make.
           </p>

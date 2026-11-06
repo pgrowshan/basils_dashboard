@@ -42,7 +42,6 @@ function Navbar() {
   const accountNav = location.pathname.startsWith('/account') && !historyNav;
   const creamNav = checkoutNav || historyNav;
   const lightNav = shopNav;
-  const sentenceNav = productNav || creamNav || accountNav;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -155,7 +154,7 @@ function Navbar() {
         </Link>
 
         {/* Center Desktop Links */}
-        <div className={`hidden md:flex items-center font-sans font-semibold ${sentenceNav ? 'space-x-8 text-[15px] font-medium normal-case tracking-normal' : 'space-x-10 text-xs uppercase tracking-[0.15em]'}`}>
+        <div className="hidden md:flex items-center space-x-8 font-circe text-[16px] font-normal normal-case tracking-normal">
           {NAV_LINKS.map((item) => (
             <NavLink 
               key={item.path}
@@ -175,7 +174,7 @@ function Navbar() {
             >
               {({ isActive }) => (
                 <>
-                  {sentenceNav ? item.productLabel : item.label}
+                  {item.label}
                   {!creamNav && !accountNav && (
                     <span className={`absolute bottom-0 left-0 h-[2px] transition-all duration-300 ease-out ${
                       lightNav ? 'bg-[#4372B8]' : 'bg-[#F9EBB4]'
@@ -188,7 +187,7 @@ function Navbar() {
         </div>
 
         {/* Right Desktop Utilities */}
-        <div className={`hidden md:flex items-center space-x-8 font-sans font-medium ${sentenceNav ? 'text-[15px] normal-case tracking-normal' : 'text-xs tracking-widest'}`}>
+        <div className="hidden md:flex items-center space-x-8 font-circe text-[16px] font-normal normal-case tracking-normal">
           {accountNav || historyNav ? (
             <Link to="/account" className={`flex items-center gap-2.5 ${historyNav ? 'text-[#4372B8]' : 'text-[#F8EFB8]'}`}>
               <div className={`rounded-full border p-2 ${historyNav ? 'border-[#4372B8]/40' : 'border-white/40'}`}>
@@ -200,12 +199,12 @@ function Navbar() {
             </Link>
           ) : user ? (
             <div className="flex items-center gap-4">
-              <Link to="/account" className={`font-semibold text-xs tracking-wider uppercase ${lightNav || checkoutNav ? 'text-[#4372B8]' : 'text-[#F9EBB4]'}`}>Hi, {user.firstName}</Link>
+              <Link to="/account" className={`${lightNav || checkoutNav ? 'text-[#4372B8]' : 'text-[#F9EBB4]'}`}>Hi, {user.firstName}</Link>
               <button 
                 onClick={handleLogout}
-                className={`transition-colors duration-300 tracking-wider uppercase font-semibold cursor-pointer ${lightNav || checkoutNav ? 'text-[#0F172A]/70 hover:text-[#4372B8]' : 'text-white/70 hover:text-[#F9EBB4]'}`}
+                className={`cursor-pointer transition-colors duration-300 ${lightNav || checkoutNav ? 'text-[#0F172A]/70 hover:text-[#4372B8]' : 'text-white/70 hover:text-[#F9EBB4]'}`}
               >
-                LOGOUT
+                Logout
               </button>
             </div>
           ) : (
@@ -218,7 +217,7 @@ function Navbar() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                 </svg>
               </div>
-              <span className="mt-0.5">{sentenceNav ? 'Sign Up | Login' : 'SIGN UP | LOGIN'}</span>
+              <span className="mt-0.5">Login</span>
             </button>
           )}
 

@@ -78,7 +78,7 @@ function FooterLink({ to, children }) {
     <li>
       <Link
         to={to}
-        className="font-['Circe'] text-[15px] leading-none text-[#F8EFB8] transition-opacity hover:opacity-70 sm:text-[16px]"
+        className="font-circe text-[15px] leading-none text-[#F8EFB8] transition-opacity hover:opacity-70 sm:text-[16px]"
       >
         {children}
       </Link>
@@ -159,7 +159,7 @@ function Footer() {
 
         <div className="mt-14 h-px bg-[#F8EFB8]/25 lg:mt-16" />
 
-        <div className="mt-5 flex flex-col items-center gap-4 font-['Circe'] text-[14px] text-[#F8EFB8] sm:flex-row sm:justify-between sm:text-[15px]">
+        <div className="mt-5 flex flex-col items-center gap-4 font-circe text-[14px] text-[#F8EFB8] sm:flex-row sm:justify-between sm:text-[15px]">
           <p>&copy; 2025 Basil&apos;s Bakery</p>
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
             {legalLinks.map((item) => (

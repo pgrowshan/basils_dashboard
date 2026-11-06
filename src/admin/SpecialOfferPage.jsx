@@ -87,7 +87,7 @@ export default function SpecialOfferPage() {
 
       <Card>
         <form onSubmit={handleSubmit} className="grid gap-4">
-          <label className="flex items-center gap-3 rounded-xl bg-[#F7F4EE] px-4 py-3 font-['Circe'] text-sm">
+          <label className="flex items-center gap-3 rounded-xl bg-[#F7F4EE] px-4 py-3 font-circe text-sm">
             <input
               type="checkbox"
               checked={form.enabled}
@@ -140,15 +140,15 @@ export default function SpecialOfferPage() {
 
           {selected && (
             <div className="rounded-2xl bg-[#FEF9E3] p-4">
-              <p className="font-['Circe'] text-[11px] font-semibold tracking-[0.12em] text-[#4372B8] uppercase">Cart preview</p>
+              <p className="font-circe text-[11px] font-semibold tracking-[0.12em] text-[#4372B8] uppercase">Cart preview</p>
               <div className="mt-3 flex gap-3">
                 {selected.image?.[0]?.url && (
                   <img src={selected.image[0].url} alt="" className="h-16 w-16 shrink-0 rounded-xl object-cover" />
                 )}
                 <div className="min-w-0">
                   <p className="font-gelica text-lg text-[#4372B8]">{form.title || 'Special Offer'}</p>
-                  <p className="font-['Circe'] text-sm">{selected.title}</p>
-                  <p className="mt-1 font-['Circe'] text-sm">
+                  <p className="font-circe text-sm">{selected.title}</p>
+                  <p className="mt-1 font-circe text-sm">
                     <span className="font-semibold text-[#4372B8]">${offerPrice ? offerPrice.toFixed(2) : '0.00'}</span>
                     {compareAtPrice > offerPrice && (
                       <span className="ml-2 text-[#7A8BA3] line-through">${compareAtPrice.toFixed(2)}</span>

@@ -31,12 +31,12 @@ export default function HomePage() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div className="min-w-0">
           <h2 className="font-gelica text-[30px] leading-tight text-[#1A2744] sm:text-[34px]">Overview</h2>
-          <p className="mt-1.5 max-w-xl font-['Circe'] text-sm leading-relaxed text-[#6B7A90]">
+          <p className="mt-1.5 max-w-xl font-circe text-sm leading-relaxed text-[#6B7A90]">
             Paid revenue, order volume, and customer activity at a glance.
           </p>
         </div>
         {data?.periodLabel && (
-          <span className="inline-flex w-fit items-center rounded-full border border-[#E7E2D6] bg-white px-3 py-1.5 font-['Circe'] text-[12px] font-medium text-[#5C6B82]">
+          <span className="inline-flex w-fit items-center rounded-full border border-[#E7E2D6] bg-white px-3 py-1.5 font-circe text-[12px] font-medium text-[#5C6B82]">
             {data.periodLabel}
           </span>
         )}

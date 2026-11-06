@@ -50,7 +50,7 @@ export function TrendChart({ trends }) {
     <Card className="flex h-full flex-col">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <p className="font-['Circe'] text-[11px] font-semibold tracking-[0.16em] text-[#8A97A8] uppercase">
+          <p className="font-circe text-[11px] font-semibold tracking-[0.16em] text-[#8A97A8] uppercase">
             Performance
           </p>
           <h3 className="mt-1 font-gelica text-[22px] text-[#1A2744]">Revenue trend</h3>
@@ -64,7 +64,7 @@ export function TrendChart({ trends }) {
                 setRange(value);
                 setActive(null);
               }}
-              className={`cursor-pointer rounded-full px-3.5 py-1.5 font-['Circe'] text-xs font-semibold capitalize transition ${
+              className={`cursor-pointer rounded-full px-3.5 py-1.5 font-circe text-xs font-semibold capitalize transition ${
                 range === value ? 'bg-white text-[#1A2744] shadow-sm' : 'text-[#6B7A90] hover:text-[#1A2744]'
               }`}
             >
@@ -74,7 +74,7 @@ export function TrendChart({ trends }) {
         </div>
       </div>
 
-      <p className="mt-3 font-['Circe'] text-[11px] text-[#8A97A8]">Paid orders only · hover a bar for volume</p>
+      <p className="mt-3 font-circe text-[11px] text-[#8A97A8]">Paid orders only · hover a bar for volume</p>
 
       <div className="relative mt-1 flex-1">
         <svg
@@ -146,11 +146,11 @@ export function TrendChart({ trends }) {
 
         {active != null && (
           <div className="pointer-events-none absolute top-3 right-3 min-w-[138px] rounded-xl border border-[#E7E2D6] bg-white/95 px-3 py-2.5 shadow-[0_12px_30px_rgba(26,39,68,0.08)] backdrop-blur">
-            <p className="font-['Circe'] text-[11px] font-medium text-[#8A97A8]">{points[active].label}</p>
-            <p className="mt-1 font-['Circe'] text-sm font-semibold tabular-nums text-[#1A2744]">
+            <p className="font-circe text-[11px] font-medium text-[#8A97A8]">{points[active].label}</p>
+            <p className="mt-1 font-circe text-sm font-semibold tabular-nums text-[#1A2744]">
               {formatMoney(points[active].revenue)}
             </p>
-            <p className="font-['Circe'] text-[12px] text-[#5C6B82]">{points[active].orders} orders</p>
+            <p className="font-circe text-[12px] text-[#5C6B82]">{points[active].orders} orders</p>
           </div>
         )}
       </div>

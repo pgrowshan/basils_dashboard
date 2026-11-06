@@ -1,0 +1,127 @@
+@font-face {
+  font-family: "circe";
+  src: url("./assets/fonts/Circe-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "circe";
+  src: url("./assets/fonts/Circe-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "gelica";
+  src: url("./assets/fonts/Gelica-ExtraLight.otf") format("opentype");
+  font-weight: 250;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "gelica";
+  src: url("./assets/fonts/Gelica-ExtraLightItalic.otf") format("opentype");
+  font-weight: 250;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "gelica";
+  src: url("./assets/fonts/Gelica-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "gelica";
+  src: url("./assets/fonts/Gelica-LightItalic.otf") format("opentype");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "gelica";
+  src: url("./assets/fonts/Gelica-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "gelica";
+  src: url("./assets/fonts/Gelica-Italic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "gelica";
+  src: url("./assets/fonts/Gelica-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "gelica";
+  src: url("./assets/fonts/Gelica-MediumItalic.otf") format("opentype");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "gelica";
+  src: url("./assets/fonts/Gelica-SemiBold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "gelica";
+  src: url("./assets/fonts/Gelica-SemiBoldItalic.otf") format("opentype");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "gelica";
+  src: url("./assets/fonts/Gelica-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "gelica";
+  src: url("./assets/fonts/Gelica-BoldItalic.otf") format("opentype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "gelica";
+  src: url("./assets/fonts/Gelica-Black.otf") format("opentype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "gelica";
+  src: url("./assets/fonts/Gelica-BlackItalic.otf") format("opentype");
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}

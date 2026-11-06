@@ -27,7 +27,7 @@ export function StatusDonut({ slices }) {
 
   return (
     <Card className="flex h-full flex-col">
-      <p className="font-['Circe'] text-[11px] font-semibold tracking-[0.16em] text-[#8A97A8] uppercase">
+      <p className="font-circe text-[11px] font-semibold tracking-[0.16em] text-[#8A97A8] uppercase">
         Fulfillment
       </p>
       <h3 className="mt-1 font-gelica text-[22px] text-[#1A2744]">Order status</h3>
@@ -52,7 +52,7 @@ export function StatusDonut({ slices }) {
           </svg>
           <div className="absolute inset-0 flex flex-col items-center justify-center">
             <p className="font-gelica text-[28px] leading-none tabular-nums text-[#1A2744]">{total}</p>
-            <p className="mt-1 font-['Circe'] text-[11px] tracking-[0.08em] text-[#8A97A8] uppercase">Total</p>
+            <p className="mt-1 font-circe text-[11px] tracking-[0.08em] text-[#8A97A8] uppercase">Total</p>
           </div>
         </div>
 
@@ -67,11 +67,11 @@ export function StatusDonut({ slices }) {
                     className="h-2 w-2 shrink-0 rounded-full"
                     style={{ backgroundColor: slice.color, opacity: muted ? 0.35 : 1 }}
                   />
-                  <span className={`truncate font-['Circe'] text-[12px] ${muted ? 'text-[#B3BCC8]' : 'text-[#3E4C63]'}`}>
+                  <span className={`truncate font-circe text-[12px] ${muted ? 'text-[#B3BCC8]' : 'text-[#3E4C63]'}`}>
                     {SHORT_STATUS[slice.status] || slice.status}
                   </span>
                 </span>
-                <span className={`shrink-0 font-['Circe'] text-[12px] tabular-nums ${muted ? 'text-[#B3BCC8]' : 'text-[#1A2744]'}`}>
+                <span className={`shrink-0 font-circe text-[12px] tabular-nums ${muted ? 'text-[#B3BCC8]' : 'text-[#1A2744]'}`}>
                   <span className="font-semibold">{slice.count}</span>
                   <span className="ml-1 text-[#8A97A8]">{share}%</span>
                 </span>

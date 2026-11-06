@@ -44,7 +44,7 @@ function Change({ change }) {
   const arrow = change.direction === 'down' ? '↓' : change.direction === 'up' ? '↑' : '→';
 
   return (
-    <p className="mt-3 flex flex-wrap items-center gap-x-1.5 font-['Circe'] text-[12px] leading-none">
+    <p className="mt-3 flex flex-wrap items-center gap-x-1.5 font-circe text-[12px] leading-none">
       <span className={`font-semibold tabular-nums ${tone}`}>
         {arrow} {change.percent.toFixed(1)}%
       </span>
@@ -67,7 +67,7 @@ function MetricCardView({ card, featured = false }) {
             {ICONS[card.id]}
           </svg>
         </span>
-        <p className="font-['Circe'] text-[13px] font-medium text-[#5C6B82]">{card.label}</p>
+        <p className="font-circe text-[13px] font-medium text-[#5C6B82]">{card.label}</p>
       </div>
       <p
         className={[

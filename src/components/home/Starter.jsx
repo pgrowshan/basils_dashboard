@@ -100,7 +100,7 @@ function Starter() {
             Pick Your Chocolate Starter
           </h2>
 
-          <p className="text-[#0F172A] text-center font-['Circe'] text-[18px] md:text-[20px] font-normal leading-normal w-full max-w-[349px] lg:max-w-[764px]">
+          <p className="text-[#0F172A] text-center font-circe text-[18px] md:text-[20px] font-normal leading-normal w-full max-w-[349px] lg:max-w-[764px]">
             Find the flavour that best matches your mind, gut and soul's
             craving.
           </p>

@@ -78,9 +78,9 @@ function ConfirmDialog({ title, body, confirmLabel, variant = 'primary', busy, o
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 p-4 sm:items-center">
       <div className="w-full max-w-md rounded-2xl bg-white p-5 shadow-2xl sm:p-6">
-        <p className="font-['Circe'] text-[11px] font-semibold tracking-[0.16em] text-[#8A97A8] uppercase">Confirm</p>
+        <p className="font-circe text-[11px] font-semibold tracking-[0.16em] text-[#8A97A8] uppercase">Confirm</p>
         <h3 className="mt-1 font-gelica text-xl text-[#1A2744]">{title}</h3>
-        <p className="mt-3 font-['Circe'] text-sm leading-relaxed text-[#5C6B82]">{body}</p>
+        <p className="mt-3 font-circe text-sm leading-relaxed text-[#5C6B82]">{body}</p>
         <div className="mt-5 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
           <Button type="button" variant="secondary" onClick={onClose} disabled={busy}>Back</Button>
           <Button type="button" variant={variant} onClick={onConfirm} disabled={busy}>
@@ -178,7 +178,7 @@ export default function OrdersPage() {
               key={item.id}
               type="button"
               onClick={() => setFilter(item.id)}
-              className={`cursor-pointer rounded-full px-3 py-1.5 font-['Circe'] text-xs font-semibold transition ${
+              className={`cursor-pointer rounded-full px-3 py-1.5 font-circe text-xs font-semibold transition ${
                 filter === item.id
                   ? 'bg-[#1A2744] text-white'
                   : 'border border-[#E7E2D6] bg-white text-[#5C6B82] hover:text-[#1A2744]'
@@ -196,7 +196,7 @@ export default function OrdersPage() {
                 key={item.id}
                 type="button"
                 onClick={() => setRange(item.id)}
-                className={`cursor-pointer rounded-lg px-2.5 py-1 font-['Circe'] text-xs font-medium ${
+                className={`cursor-pointer rounded-lg px-2.5 py-1 font-circe text-xs font-medium ${
                   range === item.id ? 'bg-[#E8F0FA] text-[#1A2744]' : 'text-[#6B7A90] hover:text-[#1A2744]'
                 }`}
               >
@@ -215,7 +215,7 @@ export default function OrdersPage() {
 
       {selected.length > 0 && (
         <div className="flex flex-col gap-2 rounded-2xl border border-[#1A2744] bg-[#1A2744] px-4 py-3 text-white sm:flex-row sm:items-center sm:justify-between">
-          <p className="font-['Circe'] text-sm font-medium">{selected.length} selected</p>
+          <p className="font-circe text-sm font-medium">{selected.length} selected</p>
           <div className="flex flex-wrap gap-2">
             <Button type="button" size="sm" variant="secondary" onClick={() => setSelected([])} disabled={busy}>
               Clear
@@ -231,7 +231,7 @@ export default function OrdersPage() {
               </Button>
             )}
             {!bulkStatus && (
-              <p className="font-['Circe'] text-xs text-white/70">Select only Paid or only Shipped orders to bulk update.</p>
+              <p className="font-circe text-xs text-white/70">Select only Paid or only Shipped orders to bulk update.</p>
             )}
           </div>
         </div>
@@ -239,16 +239,16 @@ export default function OrdersPage() {
 
       <Card className="overflow-hidden p-0 sm:p-0">
         <div className="flex items-center justify-between border-b border-[#F0EBE0] px-4 py-3 sm:px-5">
-          <p className="font-['Circe'] text-sm text-[#6B7A90]">
+          <p className="font-circe text-sm text-[#6B7A90]">
             {isLoading ? 'Loading…' : `${meta.total} order${meta.total === 1 ? '' : 's'}`}
             {isFetching && !isLoading ? ' · updating' : ''}
           </p>
-          <p className="font-['Circe'] text-xs text-[#8A97A8]">Page {meta.page} of {meta.pages || 1}</p>
+          <p className="font-circe text-xs text-[#8A97A8]">Page {meta.page} of {meta.pages || 1}</p>
         </div>
 
         <div className="overflow-x-auto">
           <table className="min-w-[920px] w-full text-left">
-            <thead className="bg-[#FBF9F4] font-['Circe'] text-[11px] tracking-[0.12em] text-[#8A97A8] uppercase">
+            <thead className="bg-[#FBF9F4] font-circe text-[11px] tracking-[0.12em] text-[#8A97A8] uppercase">
               <tr>
                 <th className="w-10 px-4 py-3 sm:px-5">
                   <input
@@ -266,7 +266,7 @@ export default function OrdersPage() {
                 <th className="px-3 py-3 pr-5 text-right font-semibold">Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#F0EBE0] font-['Circe'] text-sm">
+            <tbody className="divide-y divide-[#F0EBE0] font-circe text-sm">
               {orders.map((order) => {
                 const open = Boolean(expanded[order._id]);
                 const next = primaryAction(order);
@@ -374,7 +374,7 @@ export default function OrdersPage() {
         </div>
 
         {!isLoading && orders.length === 0 && (
-          <p className="px-4 py-10 text-center font-['Circe'] text-sm text-[#6B7A90]">No orders in this view.</p>
+          <p className="px-4 py-10 text-center font-circe text-sm text-[#6B7A90]">No orders in this view.</p>
         )}
 
         {meta.pages > 1 && (
@@ -382,7 +382,7 @@ export default function OrdersPage() {
             <Button type="button" size="sm" variant="secondary" disabled={page <= 1 || busy} onClick={() => setPage((value) => value - 1)}>
               Previous
             </Button>
-            <p className="font-['Circe'] text-xs text-[#8A97A8]">
+            <p className="font-circe text-xs text-[#8A97A8]">
               {((meta.page - 1) * meta.limit) + 1}–{Math.min(meta.page * meta.limit, meta.total)} of {meta.total}
             </p>
             <Button type="button" size="sm" variant="secondary" disabled={page >= meta.pages || busy} onClick={() => setPage((value) => value + 1)}>

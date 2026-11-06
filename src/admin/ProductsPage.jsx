@@ -82,9 +82,9 @@ function ConfirmDialog({ title, body, confirmLabel, busy, onClose, onConfirm }) 
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 p-4 sm:items-center">
       <div className="w-full max-w-md rounded-2xl bg-white p-5 shadow-2xl sm:p-6">
-        <p className="font-['Circe'] text-[11px] font-semibold tracking-[0.16em] text-[#8A97A8] uppercase">Confirm</p>
+        <p className="font-circe text-[11px] font-semibold tracking-[0.16em] text-[#8A97A8] uppercase">Confirm</p>
         <h3 className="mt-1 font-gelica text-xl text-[#1A2744]">{title}</h3>
-        <p className="mt-3 font-['Circe'] text-sm leading-relaxed text-[#5C6B82]">{body}</p>
+        <p className="mt-3 font-circe text-sm leading-relaxed text-[#5C6B82]">{body}</p>
         <div className="mt-5 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
           <Button type="button" variant="secondary" onClick={onClose} disabled={busy}>Back</Button>
           <Button type="button" variant="danger" onClick={onConfirm} disabled={busy}>
@@ -111,7 +111,7 @@ function ImageField({ label, hint, file, existingUrl, onChange }) {
 
   return (
     <div>
-      <span className="mb-1.5 block font-['Circe'] text-[11px] font-semibold tracking-[0.12em] text-[#7A8BA3] uppercase">
+      <span className="mb-1.5 block font-circe text-[11px] font-semibold tracking-[0.12em] text-[#7A8BA3] uppercase">
         {label}
       </span>
       <div className="flex items-center gap-3 rounded-xl border border-[#D7DEE8] bg-[#FBF9F4] p-2.5">
@@ -119,11 +119,11 @@ function ImageField({ label, hint, file, existingUrl, onChange }) {
           {preview ? (
             <img src={preview} alt="" className="h-full w-full object-cover" />
           ) : (
-            <div className="flex h-full items-center justify-center font-['Circe'] text-[10px] text-[#8A97A8]">Photo</div>
+            <div className="flex h-full items-center justify-center font-circe text-[10px] text-[#8A97A8]">Photo</div>
           )}
         </div>
         <div className="min-w-0 flex-1">
-          <label className="inline-flex cursor-pointer items-center rounded-lg border border-[#D7DEE8] bg-white px-3 py-1.5 font-['Circe'] text-xs font-semibold text-[#1A2744] hover:bg-[#F7F4EE]">
+          <label className="inline-flex cursor-pointer items-center rounded-lg border border-[#D7DEE8] bg-white px-3 py-1.5 font-circe text-xs font-semibold text-[#1A2744] hover:bg-[#F7F4EE]">
             {preview ? 'Replace' : 'Choose photo'}
             <input
               type="file"
@@ -132,7 +132,7 @@ function ImageField({ label, hint, file, existingUrl, onChange }) {
               onChange={(event) => onChange(event.target.files?.[0] || null)}
             />
           </label>
-          <p className="mt-1 truncate font-['Circe'] text-[11px] text-[#8A97A8]">
+          <p className="mt-1 truncate font-circe text-[11px] text-[#8A97A8]">
             {file?.name || hint || 'PNG or JPG'}
           </p>
         </div>
@@ -177,7 +177,7 @@ function ProductEditor({ product, categories, busy, error, onClose, onSubmit }) 
       <aside className="relative flex h-full w-full max-w-xl flex-col bg-[#F4F1EA] shadow-2xl">
         <div className="flex items-start justify-between gap-3 border-b border-[#E6E1D6] bg-white px-5 py-4">
           <div>
-            <p className="font-['Circe'] text-[11px] font-semibold tracking-[0.16em] text-[#4372B8] uppercase">
+            <p className="font-circe text-[11px] font-semibold tracking-[0.16em] text-[#4372B8] uppercase">
               {isEdit ? 'Edit product' : 'New product'}
             </p>
             <h3 className="mt-1 font-gelica text-xl text-[#1A2744]">
@@ -200,7 +200,7 @@ function ProductEditor({ product, categories, busy, error, onClose, onSubmit }) 
         <form onSubmit={handleSubmit} className="flex min-h-0 flex-1 flex-col">
           <div className="flex-1 space-y-6 overflow-y-auto px-5 py-5">
             <section className="space-y-4">
-              <p className="font-['Circe'] text-[11px] font-semibold tracking-[0.14em] text-[#8A97A8] uppercase">Shop listing</p>
+              <p className="font-circe text-[11px] font-semibold tracking-[0.14em] text-[#8A97A8] uppercase">Shop listing</p>
               <div className="grid gap-4 sm:grid-cols-2">
                 <Field label="Category">
                   <Select required name="categoryId" value={fields.categoryId} onChange={setField}>
@@ -234,8 +234,8 @@ function ProductEditor({ product, categories, busy, error, onClose, onSubmit }) 
 
             <section className="space-y-4">
               <div>
-                <p className="font-['Circe'] text-[11px] font-semibold tracking-[0.14em] text-[#8A97A8] uppercase">Product details</p>
-                <p className="mt-1 font-['Circe'] text-xs text-[#7A8BA3]">These appear on the product page. Replace a photo only if it needs updating.</p>
+                <p className="font-circe text-[11px] font-semibold tracking-[0.14em] text-[#8A97A8] uppercase">Product details</p>
+                <p className="mt-1 font-circe text-xs text-[#7A8BA3]">These appear on the product page. Replace a photo only if it needs updating.</p>
               </div>
               <Field label="How much to take">
                 <Input required name="howMuchToTakeText" value={fields.howMuchToTakeText} onChange={setField} placeholder="One square, then wait" />
@@ -382,7 +382,7 @@ export default function ProductsPage() {
           <button
             type="button"
             onClick={() => setCategoryId('')}
-            className={`cursor-pointer rounded-full px-3 py-1.5 font-['Circe'] text-xs font-semibold transition ${
+            className={`cursor-pointer rounded-full px-3 py-1.5 font-circe text-xs font-semibold transition ${
               !categoryId ? 'bg-[#1A2744] text-white' : 'border border-[#E7E2D6] bg-white text-[#5C6B82] hover:text-[#1A2744]'
             }`}
           >
@@ -394,7 +394,7 @@ export default function ProductsPage() {
               key={category._id}
               type="button"
               onClick={() => setCategoryId(category._id)}
-              className={`cursor-pointer rounded-full px-3 py-1.5 font-['Circe'] text-xs font-semibold transition ${
+              className={`cursor-pointer rounded-full px-3 py-1.5 font-circe text-xs font-semibold transition ${
                 categoryId === category._id
                   ? 'bg-[#1A2744] text-white'
                   : 'border border-[#E7E2D6] bg-white text-[#5C6B82] hover:text-[#1A2744]'
@@ -415,11 +415,11 @@ export default function ProductsPage() {
 
       <Card className="overflow-hidden p-0 sm:p-0">
         <div className="flex items-center justify-between border-b border-[#F0EBE0] px-4 py-3 sm:px-5">
-          <p className="font-['Circe'] text-sm text-[#6B7A90]">
+          <p className="font-circe text-sm text-[#6B7A90]">
             {isLoading ? 'Loading…' : `${meta.total} product${meta.total === 1 ? '' : 's'}`}
             {isFetching && !isLoading ? ' · updating' : ''}
           </p>
-          <p className="font-['Circe'] text-xs text-[#8A97A8]">Page {meta.page} of {meta.pages || 1}</p>
+          <p className="font-circe text-xs text-[#8A97A8]">Page {meta.page} of {meta.pages || 1}</p>
         </div>
 
         <ul className="divide-y divide-[#F0EBE0]">
@@ -431,14 +431,14 @@ export default function ProductsPage() {
                 ) : null}
               </div>
               <div className="min-w-0 flex-1">
-                <p className="truncate font-['Circe'] font-semibold text-[#1A2744]">{product.title}</p>
-                <p className="mt-0.5 truncate font-['Circe'] text-[12px] text-[#8A97A8]">
+                <p className="truncate font-circe font-semibold text-[#1A2744]">{product.title}</p>
+                <p className="mt-0.5 truncate font-circe text-[12px] text-[#8A97A8]">
                   {product.subTitle}
                   {product.subTitle ? ' · ' : ''}
                   {categoryName(product.categoryId)}
                 </p>
                 <div className="mt-2 flex flex-wrap items-center gap-2 sm:hidden">
-                  <p className="font-['Circe'] text-sm font-semibold tabular-nums">{money(product.price)}</p>
+                  <p className="font-circe text-sm font-semibold tabular-nums">{money(product.price)}</p>
                   <Button type="button" size="sm" variant="secondary" onClick={() => openEditor(product)}>
                     Edit
                   </Button>
@@ -449,8 +449,8 @@ export default function ProductsPage() {
               </div>
               <div className="hidden shrink-0 items-center gap-3 sm:flex">
                 <div className="text-right">
-                  <p className="font-['Circe'] font-semibold tabular-nums text-[#1A2744]">{money(product.price)}</p>
-                  <p className="mt-0.5 font-['Circe'] text-[11px] text-[#8A97A8]">Updated {formatWhen(product.updatedAt)}</p>
+                  <p className="font-circe font-semibold tabular-nums text-[#1A2744]">{money(product.price)}</p>
+                  <p className="mt-0.5 font-circe text-[11px] text-[#8A97A8]">Updated {formatWhen(product.updatedAt)}</p>
                 </div>
                 <Button type="button" size="sm" variant="secondary" onClick={() => openEditor(product)}>
                   Edit
@@ -466,7 +466,7 @@ export default function ProductsPage() {
         {!isLoading && products.length === 0 && (
           <div className="px-4 py-12 text-center">
             <p className="font-gelica text-lg text-[#1A2744]">No products in this view</p>
-            <p className="mt-2 font-['Circe'] text-sm text-[#6B7A90]">
+            <p className="mt-2 font-circe text-sm text-[#6B7A90]">
               {q || categoryId ? 'Try another search or category.' : 'Add the first bar to put it on the shop.'}
             </p>
             {!q && !categoryId && categories.length > 0 && (
@@ -480,7 +480,7 @@ export default function ProductsPage() {
             <Button type="button" size="sm" variant="secondary" disabled={page <= 1} onClick={() => setPage((value) => value - 1)}>
               Previous
             </Button>
-            <p className="font-['Circe'] text-xs text-[#8A97A8]">
+            <p className="font-circe text-xs text-[#8A97A8]">
               {((meta.page - 1) * meta.limit) + 1}–{Math.min(meta.page * meta.limit, meta.total)} of {meta.total}
             </p>
             <Button type="button" size="sm" variant="secondary" disabled={page >= meta.pages} onClick={() => setPage((value) => value + 1)}>

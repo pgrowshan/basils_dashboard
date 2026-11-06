@@ -60,7 +60,7 @@ export default function ProductMain() {
         </div>
 
         <div className="lg:pt-1">
-          <p className="font-['Circe'] text-[13px] text-[#8FB0DC] md:text-[14px]">
+          <p className="font-circe text-[13px] text-[#8FB0DC] md:text-[14px]">
             <Link to="/chocolates" className="hover:text-[#4372B8]">
               Shop Chocolate
             </Link>
@@ -72,11 +72,11 @@ export default function ProductMain() {
             {product.name}
           </h1>
 
-          <p className="mt-4 font-['Circe'] text-[22px] font-semibold text-[#141820] md:text-[24px]">
+          <p className="mt-4 font-circe text-[22px] font-semibold text-[#141820] md:text-[24px]">
             {formatPrice(product.price)}
           </p>
 
-          <div className="mt-5 flex h-11 w-[132px] items-center justify-between border border-[#E6E1D8] bg-white px-3 font-['Circe'] text-[16px] text-[#141820]">
+          <div className="mt-5 flex h-11 w-[132px] items-center justify-between border border-[#E6E1D8] bg-white px-3 font-circe text-[16px] text-[#141820]">
             <button
               type="button"
               onClick={() => setQuantity((value) => Math.max(1, value - 1))}
@@ -99,12 +99,12 @@ export default function ProductMain() {
           <button
             type="button"
             onClick={handlePurchase}
-            className="mt-3 w-full bg-[#F9ECB7] py-3.5 font-['Circe'] text-[15px] font-medium text-[#3E6FBE] transition-colors hover:bg-[#F6E49A] md:text-[16px]"
+            className="mt-3 w-full bg-[#F9ECB7] py-3.5 font-circe text-[15px] font-medium text-[#3E6FBE] transition-colors hover:bg-[#F6E49A] md:text-[16px]"
           >
             {user ? "Add to Bag" : "Login to Purchase"}
           </button>
 
-          <p className="mt-5 font-['Circe'] text-[13.5px] leading-[1.65] text-[#4B5563] md:text-[14.5px]">
+          <p className="mt-5 font-circe text-[13.5px] leading-[1.65] text-[#4B5563] md:text-[14.5px]">
             {product.description}
           </p>
 
@@ -114,7 +114,7 @@ export default function ProductMain() {
             {features.map((label) => (
               <div key={label} className="flex flex-col items-center text-center">
                 <div className="h-[72px] w-[72px] rounded-full bg-[#D5D5D5] md:h-[78px] md:w-[78px]" />
-                <p className="mt-3 whitespace-pre-line font-['Circe'] text-[10px] font-medium uppercase leading-[1.35] tracking-[0.08em] text-[#3F3F3F] md:text-[11px]">
+                <p className="mt-3 whitespace-pre-line font-circe text-[10px] font-medium uppercase leading-[1.35] tracking-[0.08em] text-[#3F3F3F] md:text-[11px]">
                   {label}
                 </p>
               </div>

@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Navigate, NavLink, Outlet, useLocation } from 'react-router-dom';
 import { clearAuthSession, getStoredUser, isAccessTokenValid } from '../lib/authSession.js';
+import logoWhite from '../assets/nav/nav-logo-white.svg';
+import logoBlue from '../assets/nav/nav-logo-blue.svg';
 
 function Icon({ name }) {
   const icons = {
@@ -44,8 +46,8 @@ function Sidebar({ onNavigate, user }) {
   return (
     <div className="flex h-full flex-col">
       <div className="border-b border-white/15 px-5 py-5">
-        <p className="font-['Circe'] text-[10px] tracking-[0.2em] text-[#F8ECB7] uppercase">Basil's Bakery</p>
-        <p className="mt-1 font-gelica text-2xl text-white">Admin</p>
+        <img src={logoWhite} alt="Basil's Bakery" className="h-10 w-auto object-contain" />
+        <p className="mt-3 font-gelica text-xl text-white">Admin</p>
       </div>
 
       <nav className="flex flex-1 flex-col gap-1 px-3 py-4">
@@ -57,7 +59,7 @@ function Sidebar({ onNavigate, user }) {
             onClick={onNavigate}
             className={({ isActive }) =>
               [
-                'flex items-center gap-3 rounded-xl px-3 py-2.5 font-["Circe"] text-sm font-medium transition',
+                'flex items-center gap-3 rounded-xl px-3 py-2.5 font-circe text-sm font-medium transition',
                 isActive
                   ? 'bg-white text-[#4372B8] shadow-sm'
                   : 'text-white/85 hover:bg-white/15 hover:text-white',
@@ -71,8 +73,8 @@ function Sidebar({ onNavigate, user }) {
       </nav>
 
       <div className="border-t border-white/15 px-5 py-4">
-        <p className="truncate font-['Circe'] text-xs text-white/80">{user.email}</p>
-        <p className="mt-0.5 font-['Circe'] text-[11px] text-[#F8ECB7]/80">Administrator</p>
+        <p className="truncate font-circe text-xs text-white/80">{user.email}</p>
+        <p className="mt-0.5 font-circe text-[11px] text-[#F8ECB7]/80">Administrator</p>
       </div>
     </div>
   );
@@ -144,15 +146,16 @@ export default function AdminLayout() {
               <path strokeLinecap="round" d="M4 7h16M4 12h16M4 17h16" />
             </svg>
           </button>
+          <img src={logoBlue} alt="Basil's Bakery" className="hidden h-8 w-auto object-contain sm:block lg:hidden" />
           <div className="min-w-0">
-            <p className="font-['Circe'] text-[10px] tracking-[0.16em] text-[#7A8BA3] uppercase">Dashboard</p>
+            <p className="font-circe text-[10px] tracking-[0.16em] text-[#7A8BA3] uppercase">Dashboard</p>
             <h1 className="truncate font-gelica text-lg text-[#1A2744] sm:text-xl">{current?.label || 'Admin'}</h1>
           </div>
         </div>
         <button
           type="button"
           onClick={logout}
-          className="cursor-pointer rounded-xl border border-[#D7DEE8] px-3 py-2 font-['Circe'] text-xs font-semibold text-[#1A2744] hover:bg-[#F4F1EA] sm:px-4 sm:text-sm"
+          className="cursor-pointer rounded-xl border border-[#D7DEE8] px-3 py-2 font-circe text-xs font-semibold text-[#1A2744] hover:bg-[#F4F1EA] sm:px-4 sm:text-sm"
         >
           Log out
         </button>

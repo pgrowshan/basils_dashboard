@@ -66,7 +66,7 @@ function InterestedInMicrodosing() {
                       className="mt-0.5 h-7 w-7 shrink-0 sm:h-8 sm:w-8"
                     />
                     <span
-                      className={`font-['Circe'] text-[16px] font-medium leading-snug transition-colors duration-200 sm:text-[18px] md:text-[20px] ${
+                      className={`font-circe text-[16px] font-medium leading-snug transition-colors duration-200 sm:text-[18px] md:text-[20px] ${
                         isActive
                           ? "text-[#F8ECB7]"
                           : "text-[#FFFAF4] group-hover:text-[#F8ECB7]"
@@ -85,7 +85,7 @@ function InterestedInMicrodosing() {
                 alt="A person opening curtains toward a sunset"
                 className="h-auto w-full"
               />
-              <p className="mt-3 font-['Circe'] text-[13px] font-normal leading-relaxed text-[#FFFAF4] sm:text-[14px] md:mt-4">
+              <p className="mt-3 font-circe text-[13px] font-normal leading-relaxed text-[#FFFAF4] sm:text-[14px] md:mt-4">
                 {activeBenefit.description}
               </p>
             </div>

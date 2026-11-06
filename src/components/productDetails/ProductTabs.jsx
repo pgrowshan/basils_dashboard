@@ -69,10 +69,10 @@ export default function ProductTabs() {
               <div className="order-2 space-y-5 lg:order-1 lg:pr-4">
                 {DOSE_COPY.map((item) => (
                   <div key={item.title}>
-                    <h3 className="font-['Circe'] text-[14px] font-semibold text-[#1A1A1A] md:text-[15px]">
+                    <h3 className="font-circe text-[14px] font-semibold text-[#1A1A1A] md:text-[15px]">
                       {item.title}
                     </h3>
-                    <p className="mt-1 font-['Circe'] text-[13px] leading-relaxed text-[#4B5563] md:text-[14px]">
+                    <p className="mt-1 font-circe text-[13px] leading-relaxed text-[#4B5563] md:text-[14px]">
                       {item.body}
                     </p>
                   </div>
@@ -84,7 +84,7 @@ export default function ProductTabs() {
                   {product.doses.map((dose) => (
                     <div key={dose.label} className="flex flex-col items-center">
                       <ChocolateGrid pieces={dose.pieces} />
-                      <span className="mt-2.5 font-['Circe'] text-[13px] text-[#1A1A1A] md:text-[14px]">
+                      <span className="mt-2.5 font-circe text-[13px] text-[#1A1A1A] md:text-[14px]">
                         {dose.label}
                       </span>
                     </div>
@@ -103,8 +103,8 @@ export default function ProductTabs() {
                 ["Reflection", "Deeper doses belong in a familiar, private space, with time set aside and someone you trust nearby if you go further."],
               ].map(([title, body]) => (
                 <div key={title}>
-                  <h3 className="font-['Circe'] text-[15px] font-semibold text-[#1A1A1A]">{title}</h3>
-                  <p className="mt-1.5 font-['Circe'] text-[14px] leading-relaxed text-[#4B5563]">{body}</p>
+                  <h3 className="font-circe text-[15px] font-semibold text-[#1A1A1A]">{title}</h3>
+                  <p className="mt-1.5 font-circe text-[14px] leading-relaxed text-[#4B5563]">{body}</p>
                 </div>
               ))}
             </div>
@@ -112,7 +112,7 @@ export default function ProductTabs() {
 
           {activeTab === "ingredients" && (
             <div className="max-w-[640px] space-y-4">
-              <h3 className="font-['Circe'] text-[15px] font-semibold text-[#1A1A1A]">What's in the bar</h3>
+              <h3 className="font-circe text-[15px] font-semibold text-[#1A1A1A]">What's in the bar</h3>
               {[
                 ["Cacao and cocoa butter", "The chocolate base."],
                 ["Cane sugar", "Just enough to carry the flavour."],
@@ -120,8 +120,8 @@ export default function ProductTabs() {
                 ["Flavour", "Fruit or nut, depending on the bar."],
               ].map(([title, body]) => (
                 <div key={title} className="border-b border-[#C5D5E6] pb-3">
-                  <p className="font-['Circe'] text-[14px] font-semibold text-[#1A1A1A]">{title}</p>
-                  <p className="mt-0.5 font-['Circe'] text-[13px] text-[#4B5563]">{body}</p>
+                  <p className="font-circe text-[14px] font-semibold text-[#1A1A1A]">{title}</p>
+                  <p className="mt-0.5 font-circe text-[13px] text-[#4B5563]">{body}</p>
                 </div>
               ))}
             </div>

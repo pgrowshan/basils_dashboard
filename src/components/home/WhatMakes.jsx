@@ -42,13 +42,13 @@ function WhatMakes() {
           <div className="flex flex-col gap-10 sm:gap-12 lg:gap-14">
             {points.map((item) => (
               <div key={item.id}>
-                <p className="font-['Circe'] text-[12px] font-medium uppercase tracking-[0.18em] text-[#1E293B] sm:text-[13px]">
+                <p className="font-circe text-[12px] font-medium uppercase tracking-[0.18em] text-[#1E293B] sm:text-[13px]">
                   {item.title}
                 </p>
                 <h3 className="mt-2 font-gelica text-[26px] font-semibold leading-tight text-[#0F172A] sm:text-[30px]">
                   {item.heading}
                 </h3>
-                <p className="mt-3 max-w-xl font-['Circe'] text-[15px] leading-relaxed text-[#334155] sm:text-[16px]">
+                <p className="mt-3 max-w-xl font-circe text-[15px] leading-relaxed text-[#334155] sm:text-[16px]">
                   {item.description}
                 </p>
               </div>

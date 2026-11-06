@@ -94,10 +94,10 @@ export default function PromosPage() {
           <article key={promo._id} className="flex flex-col gap-3 rounded-2xl border border-[#E6E1D6] bg-white p-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="min-w-0">
               <div className="flex flex-wrap items-center gap-2">
-                <p className="font-['Circe'] font-semibold">{promo.code}</p>
+                <p className="font-circe font-semibold">{promo.code}</p>
                 <Badge tone={promo.active ? 'gold' : 'gray'}>{promo.active ? 'Active' : 'Off'}</Badge>
               </div>
-              <p className="mt-1 font-['Circe'] text-sm text-[#5C6B82]">
+              <p className="mt-1 font-circe text-sm text-[#5C6B82]">
                 {promo.discountType === 'percent' ? `${promo.amount}% off` : `$${Number(promo.amount).toFixed(2)} off`}
                 {promo.minSubtotal ? ` · minimum $${Number(promo.minSubtotal).toFixed(2)}` : ''}
               </p>

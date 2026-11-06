@@ -121,7 +121,7 @@ function Bundles() {
             {!submittedEmail ? (
               <form onSubmit={handleRestockSubmit} className="flex flex-col">
                 <h3 className="font-gelica text-2xl font-semibold text-[#0F172A]">Restock Alert</h3>
-                <p className="mt-3 font-['Circe'] text-sm text-[#64748B]">
+                <p className="mt-3 font-circe text-sm text-[#64748B]">
                   We&apos;ll let you know the moment the <strong>{selectedProduct?.name}</strong> is back in stock.
                 </p>
                 <input
@@ -130,11 +130,11 @@ function Bundles() {
                   placeholder="Enter your email address"
                   value={emailInput}
                   onChange={(event) => setEmailInput(event.target.value)}
-                  className="mt-6 w-full border border-[#E7E2D6] bg-white px-4 py-3 font-['Circe'] text-sm focus:border-[#4372B8] focus:outline-none"
+                  className="mt-6 w-full border border-[#E7E2D6] bg-white px-4 py-3 font-circe text-sm focus:border-[#4372B8] focus:outline-none"
                 />
                 <button
                   type="submit"
-                  className="mt-4 w-full bg-[#0F172A] py-3 font-['Circe'] text-sm font-semibold tracking-wide text-[#F8ECB7]"
+                  className="mt-4 w-full bg-[#0F172A] py-3 font-circe text-sm font-semibold tracking-wide text-[#F8ECB7]"
                 >
                   Notify Me
                 </button>
@@ -142,7 +142,7 @@ function Bundles() {
             ) : (
               <div className="py-6 text-center">
                 <h3 className="font-gelica text-2xl font-semibold text-[#0F172A]">Subscription Added!</h3>
-                <p className="mt-2 font-['Circe'] text-sm text-[#64748B]">
+                <p className="mt-2 font-circe text-sm text-[#64748B]">
                   We&apos;ll notify you at <strong>{emailInput}</strong>.
                 </p>
               </div>

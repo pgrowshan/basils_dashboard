@@ -1,13 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Great+Vibes&family=Montserrat:wght@200;300;400;500;600;700&family=Young+Serif&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap');
-
 @import "tailwindcss";
+@import "./fonts.css";
 
 @theme {
-  --font-sans: "Montserrat", sans-serif;
-  --font-serif: "Cormorant Garamond", serif;
-  --font-script: "Great Vibes", cursive;
-  --font-gelica: "Young Serif", "Fraunces", serif;
-  --font-circe: "Circe", sans-serif;
+  --font-sans: "circe", "Circe", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "gelica", "Gelica", ui-serif, Georgia, serif;
+  --font-script: "gelica", "Gelica", ui-serif, Georgia, serif;
+  --font-gelica: "gelica", "Gelica", ui-serif, Georgia, serif;
+  --font-circe: "circe", "Circe", ui-sans-serif, system-ui, sans-serif;
 
   --color-gold-cream: #F9EBB4;
   --color-gold-dark: #D4AF37;
@@ -54,12 +53,34 @@
   }
 }
 
+html {
+  font-family: "circe", "Circe", sans-serif;
+  font-weight: 400;
+}
+
 body {
-  font-family: var(--font-sans);
+  font-family: "circe", "Circe", sans-serif;
+  font-weight: 400;
   background-color: #f7f5f0;
   color: var(--color-chocolate-dark);
   margin: 0;
   padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "gelica", "Gelica", serif;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
 }
 
 /* Custom Design System Utilities */

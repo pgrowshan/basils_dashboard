@@ -120,7 +120,7 @@ function Faq() {
           <h2 className="font-gelica text-[32px] font-semibold leading-tight text-[#0F172A] sm:text-4xl lg:text-[48px]">
             Questions for the Curious
           </h2>
-          <p className="mx-auto mt-3 max-w-xl font-['Circe'] text-[15px] leading-relaxed text-[#1E293B] sm:mt-4 sm:text-[17px]">
+          <p className="mx-auto mt-3 max-w-xl font-circe text-[15px] leading-relaxed text-[#1E293B] sm:mt-4 sm:text-[17px]">
             Everything you need to know about our chocolate and how we work.
           </p>
         </div>
@@ -136,7 +136,7 @@ function Faq() {
                   aria-expanded={isOpen}
                   className="flex w-full items-center justify-between gap-4 py-5 text-left sm:py-6"
                 >
-                  <span className="font-['Circe'] text-[17px] font-normal leading-snug text-[#0F172A] sm:text-[20px]">
+                  <span className="font-circe text-[17px] font-normal leading-snug text-[#0F172A] sm:text-[20px]">
                     {item.question}
                   </span>
                   <svg
@@ -159,7 +159,7 @@ function Faq() {
                   className={`grid transition-all duration-300 ease-in-out ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
                 >
                   <div className="overflow-hidden">
-                    <p className="max-w-3xl pb-5 font-['Circe'] text-[15px] leading-relaxed text-[#334155] sm:pb-6 sm:text-[16px]">
+                    <p className="max-w-3xl pb-5 font-circe text-[15px] leading-relaxed text-[#334155] sm:pb-6 sm:text-[16px]">
                       {item.answer}
                     </p>
                   </div>
@@ -173,12 +173,12 @@ function Faq() {
           <h3 className="font-gelica text-[28px] font-semibold leading-tight text-[#0F172A] sm:text-[32px]">
             Still have questions?
           </h3>
-          <p className="mt-3 font-['Circe'] text-[15px] leading-relaxed text-[#1E293B] sm:text-[17px]">
+          <p className="mt-3 font-circe text-[15px] leading-relaxed text-[#1E293B] sm:text-[17px]">
             Get in touch with us and we'll answer what you want to know.
           </p>
           <Link
             to="/our-mission"
-            className="mt-6 inline-flex items-center justify-center bg-[#F8ECB7] px-6 py-2.5 font-['Circe'] text-[16px] font-medium text-[#4372B8] transition-colors hover:bg-[#F3E3A4]"
+            className="mt-6 inline-flex items-center justify-center bg-[#F8ECB7] px-6 py-2.5 font-circe text-[16px] font-medium text-[#4372B8] transition-colors hover:bg-[#F3E3A4]"
           >
             Contact Us
           </Link>

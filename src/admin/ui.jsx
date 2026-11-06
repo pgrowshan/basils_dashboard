@@ -3,13 +3,13 @@ export function PageHeader({ eyebrow, title, description, action }) {
     <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
       <div className="min-w-0">
         {eyebrow && (
-          <p className="font-['Circe'] text-[11px] font-semibold tracking-[0.18em] text-[#4372B8] uppercase">
+          <p className="font-circe text-[11px] font-semibold tracking-[0.18em] text-[#4372B8] uppercase">
             {eyebrow}
           </p>
         )}
         <h2 className="mt-1 font-gelica text-[28px] leading-tight text-[#1A2744] sm:text-[32px]">{title}</h2>
         {description && (
-          <p className="mt-2 max-w-2xl font-['Circe'] text-sm leading-relaxed text-[#5C6B82]">{description}</p>
+          <p className="mt-2 max-w-2xl font-circe text-sm leading-relaxed text-[#5C6B82]">{description}</p>
         )}
       </div>
       {action}
@@ -29,18 +29,18 @@ export function Field({ label, hint, children }) {
   return (
     <label className="block">
       {label && (
-        <span className="mb-1.5 block font-['Circe'] text-[11px] font-semibold tracking-[0.12em] text-[#7A8BA3] uppercase">
+        <span className="mb-1.5 block font-circe text-[11px] font-semibold tracking-[0.12em] text-[#7A8BA3] uppercase">
           {label}
         </span>
       )}
       {children}
-      {hint && <span className="mt-1.5 block font-['Circe'] text-xs text-[#7A8BA3]">{hint}</span>}
+      {hint && <span className="mt-1.5 block font-circe text-xs text-[#7A8BA3]">{hint}</span>}
     </label>
   );
 }
 
 const control =
-  'w-full rounded-xl border border-[#D7DEE8] bg-[#FBF9F4] px-3.5 py-3 font-["Circe"] text-sm text-[#1A2744] outline-none transition focus:border-[#4372B8] focus:bg-white';
+  'w-full rounded-xl border border-[#D7DEE8] bg-[#FBF9F4] px-3.5 py-3 font-circe text-sm text-[#1A2744] outline-none transition focus:border-[#4372B8] focus:bg-white';
 
 export function Input(props) {
   return <input {...props} className={`${control} ${props.className || ''}`} />;
@@ -71,7 +71,7 @@ export function Button({ children, variant = 'primary', size = 'md', className =
   return (
     <button
       {...props}
-      className={`inline-flex cursor-pointer items-center justify-center rounded-xl font-['Circe'] font-semibold transition disabled:cursor-wait disabled:opacity-50 ${styles[variant]} ${sizes[size] || sizes.md} ${className}`}
+      className={`inline-flex cursor-pointer items-center justify-center rounded-xl font-circe font-semibold transition disabled:cursor-wait disabled:opacity-50 ${styles[variant]} ${sizes[size] || sizes.md} ${className}`}
     >
       {children}
     </button>
@@ -84,13 +84,13 @@ export function StatusNote({ tone = 'muted', children }) {
     success: 'text-[#3E5A30]',
     danger: 'text-red-600',
   };
-  return <p className={`font-['Circe'] text-sm ${styles[tone]}`}>{children}</p>;
+  return <p className={`font-circe text-sm ${styles[tone]}`}>{children}</p>;
 }
 
 export function EmptyState({ children }) {
   return (
     <Card>
-      <p className="py-6 text-center font-['Circe'] text-sm text-[#5C6B82]">{children}</p>
+      <p className="py-6 text-center font-circe text-sm text-[#5C6B82]">{children}</p>
     </Card>
   );
 }
@@ -105,7 +105,7 @@ export function Badge({ children, tone = 'blue' }) {
     yellow: 'bg-[#FFF3D6] text-[#8A6D1B]',
   };
   return (
-    <span className={`inline-flex rounded-full px-2.5 py-1 font-['Circe'] text-[11px] font-semibold ${styles[tone]}`}>
+    <span className={`inline-flex rounded-full px-2.5 py-1 font-circe text-[11px] font-semibold ${styles[tone]}`}>
       {children}
     </span>
   );

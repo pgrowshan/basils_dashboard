@@ -10,13 +10,13 @@ export default function CheckoutStepper({ active = 1 }) {
         return (
           <div key={label} className="relative z-10 flex flex-1 flex-col items-center">
             <div
-              className={`flex h-7 w-7 items-center justify-center rounded-full font-['Circe'] text-[13px] font-semibold ${
+              className={`flex h-7 w-7 items-center justify-center rounded-full font-circe text-[13px] font-semibold ${
                 current ? "bg-[#F6E7A8] text-[#2C3A4A]" : "bg-white text-[#4372B8]"
               }`}
             >
               {number}
             </div>
-            <span className="mt-2 font-['Circe'] text-[11px] font-medium tracking-[0.16em] text-white">
+            <span className="mt-2 font-circe text-[11px] font-medium tracking-[0.16em] text-white">
               {label.toUpperCase()}
             </span>
           </div>

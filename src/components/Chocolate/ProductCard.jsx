@@ -14,7 +14,7 @@ function ProductCard({ product, onQuickAdd, onRestock }) {
         />
 
         {soldOut && (
-          <span className="absolute left-3 top-3 bg-[#0F172A] px-2.5 py-1.5 font-['Circe'] text-[11px] font-semibold leading-none text-[#F8ECB7] md:left-4 md:top-4 md:text-[12px]">
+          <span className="absolute left-3 top-3 bg-[#0F172A] px-2.5 py-1.5 font-circe text-[11px] font-semibold leading-none text-[#F8ECB7] md:left-4 md:top-4 md:text-[12px]">
             Too Yummy - Sold Out!
           </span>
         )}
@@ -27,7 +27,7 @@ function ProductCard({ product, onQuickAdd, onRestock }) {
               event.stopPropagation();
               onRestock?.(product);
             }}
-            className="absolute inset-x-0 bottom-0 bg-[#0F172A] py-3 font-['Circe'] text-[13px] font-semibold text-[#F8ECB7] md:text-[15px]"
+            className="absolute inset-x-0 bottom-0 bg-[#0F172A] py-3 font-circe text-[13px] font-semibold text-[#F8ECB7] md:text-[15px]"
           >
             Get Restock Update
           </button>
@@ -41,7 +41,7 @@ function ProductCard({ product, onQuickAdd, onRestock }) {
               event.stopPropagation();
               onQuickAdd?.(product);
             }}
-            className="absolute inset-x-0 bottom-0 bg-[#4372B8] py-3 font-['Circe'] text-[13px] font-semibold text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100 md:text-[15px]"
+            className="absolute inset-x-0 bottom-0 bg-[#4372B8] py-3 font-circe text-[13px] font-semibold text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100 md:text-[15px]"
           >
             Quick Add
           </button>
@@ -54,10 +54,10 @@ function ProductCard({ product, onQuickAdd, onRestock }) {
             {product.name}
           </h3>
         </Link>
-        <p className="mt-1.5 font-['Circe'] text-[11px] font-medium uppercase tracking-[0.16em] text-[#64748B]">
+        <p className="mt-1.5 font-circe text-[11px] font-medium uppercase tracking-[0.16em] text-[#64748B]">
           {product.category}
         </p>
-        <p className="mt-1.5 font-['Circe'] text-[15px] font-semibold text-[#0F172A]">
+        <p className="mt-1.5 font-circe text-[15px] font-semibold text-[#0F172A]">
           {product.price}
         </p>
       </div>
