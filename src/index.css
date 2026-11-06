@@ -53,34 +53,36 @@
   }
 }
 
-html {
-  font-family: "circe", "Circe", sans-serif;
-  font-weight: 400;
-}
+@layer base {
+  html {
+    font-family: "circe", "Circe", sans-serif;
+    font-weight: 400;
+  }
 
-body {
-  font-family: "circe", "Circe", sans-serif;
-  font-weight: 400;
-  background-color: #f7f5f0;
-  color: var(--color-chocolate-dark);
-  margin: 0;
-  padding: 0;
-}
+  body {
+    font-family: "circe", "Circe", sans-serif;
+    font-weight: 400;
+    background-color: #f7f5f0;
+    color: var(--color-chocolate-dark);
+    margin: 0;
+    padding: 0;
+  }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "gelica", "Gelica", serif;
-}
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "gelica", "Gelica", serif;
+  }
 
-button,
-input,
-select,
-textarea {
-  font-family: inherit;
+  button,
+  input,
+  select,
+  textarea {
+    font-family: inherit;
+  }
 }
 
 /* Custom Design System Utilities */

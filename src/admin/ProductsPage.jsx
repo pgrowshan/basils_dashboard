@@ -5,23 +5,27 @@ import { useGetAdminProducts } from '../hooks/product/useGetProducts.js';
 import { getApiErrorMessage } from '../lib/getApiErrorMessage.js';
 import { Button, Card, Field, Input, PageHeader, Select, StatusNote, Textarea } from './ui.jsx';
 
+const MAX_PHOTOS = 8;
+
 const EMPTY_FIELDS = {
   categoryId: '',
   title: '',
   subTitle: '',
   description: '',
   price: '',
+  dosePerPiece: '',
+  piecesPerBar: '24',
   howMuchToTakeText: '',
   whereToTakeText: '',
   ingredientsText: '',
 };
 
 const EMPTY_FILES = {
-  image: null,
-  howMuchToTakeImage: null,
   whereToTakeImage: null,
   ingredientsImage: null,
 };
+
+const SECTION_HINT = 'Separate sections with a blank line. The first line of a section shows in bold.';
 
 function money(amount) {
   return `$${Number(amount || 0).toFixed(2)}`;
@@ -43,6 +47,8 @@ function fieldsFromProduct(product) {
     subTitle: product.subTitle || '',
     description: product.description || '',
     price: product.price === 0 || product.price ? String(product.price) : '',
+    dosePerPiece: product.dosePerPiece || '',
+    piecesPerBar: product.piecesPerBar ? String(product.piecesPerBar) : '24',
     howMuchToTakeText: product.howMuchToTake?.text || '',
     whereToTakeText: product.whereToTake?.text || '',
     ingredientsText: product.ingredients?.text || '',
@@ -51,28 +57,29 @@ function fieldsFromProduct(product) {
 
 function existingImages(product) {
   return {
-    image: product?.image?.[0]?.url || '',
-    howMuchToTakeImage: product?.howMuchToTake?.image?.url || '',
     whereToTakeImage: product?.whereToTake?.image?.url || '',
     ingredientsImage: product?.ingredients?.image?.url || '',
   };
 }
 
-function buildFormData(fields, files) {
+function buildFormData(fields, files, photos, isEdit) {
   const formData = new FormData();
-  formData.append('data', JSON.stringify({
+  const data = {
     categoryId: fields.categoryId,
     title: fields.title.trim(),
     subTitle: fields.subTitle.trim(),
     description: fields.description.trim(),
     price: Number(fields.price),
+    dosePerPiece: fields.dosePerPiece.trim(),
+    piecesPerBar: Number(fields.piecesPerBar),
     howMuchToTakeText: fields.howMuchToTakeText.trim(),
     whereToTakeText: fields.whereToTakeText.trim(),
     ingredientsText: fields.ingredientsText.trim(),
     subDescriptions: [],
-  }));
-  if (files.image) formData.append('image', files.image);
-  if (files.howMuchToTakeImage) formData.append('howMuchToTakeImage', files.howMuchToTakeImage);
+  };
+  if (isEdit) data.keepImages = photos.kept.map((image) => image.publicId);
+  formData.append('data', JSON.stringify(data));
+  photos.added.forEach((file) => formData.append('image', file));
   if (files.whereToTakeImage) formData.append('whereToTakeImage', files.whereToTakeImage);
   if (files.ingredientsImage) formData.append('ingredientsImage', files.ingredientsImage);
   return formData;
@@ -141,10 +148,106 @@ function ImageField({ label, hint, file, existingUrl, onChange }) {
   );
 }
 
+function FilePreview({ file, className }) {
+  const [url, setUrl] = useState('');
+
+  useEffect(() => {
+    const objectUrl = URL.createObjectURL(file);
+    setUrl(objectUrl);
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [file]);
+
+  return url ? <img src={url} alt="" className={className} /> : null;
+}
+
+function PhotoTile({ cover, onRemove, children }) {
+  return (
+    <div className="relative aspect-square overflow-hidden rounded-lg bg-[#EFEBE3]">
+      {children}
+      {cover && (
+        <span className="absolute left-1 top-1 rounded bg-[#1A2744] px-1.5 py-0.5 font-circe text-[9px] font-semibold text-white">
+          Cover
+        </span>
+      )}
+      <button
+        type="button"
+        onClick={onRemove}
+        aria-label="Remove photo"
+        className="absolute right-1 top-1 inline-flex h-6 w-6 cursor-pointer items-center justify-center rounded-full bg-white/90 text-[#1A2744] shadow hover:bg-white"
+      >
+        <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+          <path strokeLinecap="round" d="M6 6l12 12M18 6L6 18" />
+        </svg>
+      </button>
+    </div>
+  );
+}
+
+function GalleryField({ photos, onChange }) {
+  const total = photos.kept.length + photos.added.length;
+  const room = MAX_PHOTOS - total;
+
+  const addFiles = (fileList) => {
+    const picked = Array.from(fileList || []).slice(0, Math.max(0, room));
+    if (picked.length) onChange({ ...photos, added: [...photos.added, ...picked] });
+  };
+
+  return (
+    <div>
+      <span className="mb-1.5 block font-circe text-[11px] font-semibold tracking-[0.12em] text-[#7A8BA3] uppercase">
+        Product photos
+      </span>
+      <div className="grid grid-cols-4 gap-2 rounded-xl border border-[#D7DEE8] bg-[#FBF9F4] p-2.5">
+        {photos.kept.map((image, index) => (
+          <PhotoTile
+            key={image.publicId}
+            cover={index === 0}
+            onRemove={() => onChange({ ...photos, kept: photos.kept.filter((item) => item.publicId !== image.publicId) })}
+          >
+            <img src={image.url} alt="" className="h-full w-full object-cover" />
+          </PhotoTile>
+        ))}
+        {photos.added.map((file, index) => (
+          <PhotoTile
+            key={`${file.name}-${file.lastModified}-${index}`}
+            cover={photos.kept.length === 0 && index === 0}
+            onRemove={() => onChange({ ...photos, added: photos.added.filter((_, i) => i !== index) })}
+          >
+            <FilePreview file={file} className="h-full w-full object-cover" />
+          </PhotoTile>
+        ))}
+        {room > 0 && (
+          <label className="flex aspect-square cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed border-[#C9D3E1] bg-white text-center font-circe text-[11px] font-semibold text-[#4372B8] hover:bg-[#F7F4EE]">
+            <span className="text-lg leading-none">+</span>
+            <span className="mt-1">Add</span>
+            <input
+              type="file"
+              accept="image/*"
+              multiple
+              className="sr-only"
+              onChange={(event) => {
+                addFiles(event.target.files);
+                event.target.value = '';
+              }}
+            />
+          </label>
+        )}
+      </div>
+      <p className="mt-1.5 font-circe text-xs text-[#7A8BA3]">
+        The first photo is the cover on the shop card. Up to {MAX_PHOTOS} photos show as thumbnails on the product page.
+      </p>
+    </div>
+  );
+}
+
 function ProductEditor({ product, categories, busy, error, onClose, onSubmit }) {
   const isEdit = Boolean(product);
   const [fields, setFields] = useState(() => fieldsFromProduct(product));
   const [files, setFiles] = useState(EMPTY_FILES);
+  const [photos, setPhotos] = useState(() => ({
+    kept: (product?.image || []).filter((image) => image?.url && image?.publicId),
+    added: [],
+  }));
   const [localError, setLocalError] = useState('');
   const images = existingImages(product);
 
@@ -160,15 +263,19 @@ function ProductEditor({ product, categories, busy, error, onClose, onSubmit }) 
   const handleSubmit = (event) => {
     event.preventDefault();
     setLocalError('');
+    if (photos.kept.length + photos.added.length === 0) {
+      setLocalError('Add at least one product photo.');
+      return;
+    }
     if (!isEdit) {
-      const missing = ['image', 'howMuchToTakeImage', 'whereToTakeImage', 'ingredientsImage']
+      const missing = ['whereToTakeImage', 'ingredientsImage']
         .filter((key) => !files[key]);
       if (missing.length) {
-        setLocalError('Add a shop photo and the three detail photos before saving.');
+        setLocalError('Add the Where to use and Ingredients photos before saving.');
         return;
       }
     }
-    onSubmit(buildFormData(fields, files));
+    onSubmit(buildFormData(fields, files, photos, isEdit));
   };
 
   return (
@@ -223,13 +330,23 @@ function ProductEditor({ product, categories, busy, error, onClose, onSubmit }) 
               <Field label="Description">
                 <Textarea required name="description" value={fields.description} onChange={setField} placeholder="What makes this bar special" />
               </Field>
-              <ImageField
-                label="Shop photo"
-                hint={isEdit ? 'Leave empty to keep the current photo' : 'Shown on the shop card'}
-                file={files.image}
-                existingUrl={images.image}
-                onChange={(file) => setFile('image', file)}
-              />
+              <div className="grid gap-4 sm:grid-cols-2">
+                <Field label="Dose per piece" hint="Like 125mg or 0.25g. Drives the dose chart.">
+                  <Input
+                    required
+                    name="dosePerPiece"
+                    value={fields.dosePerPiece}
+                    onChange={setField}
+                    placeholder="125mg"
+                    pattern="\s*\d+(\.\d+)?\s*(mg|MG|Mg|g|G)\s*"
+                    title="Use a number with mg or g, like 125mg or 0.25g"
+                  />
+                </Field>
+                <Field label="Pieces per bar" hint="Shown as “24 PIECES / BAR”">
+                  <Input required name="piecesPerBar" type="number" min="1" step="1" value={fields.piecesPerBar} onChange={setField} placeholder="24" />
+                </Field>
+              </div>
+              <GalleryField photos={photos} onChange={setPhotos} />
             </section>
 
             <section className="space-y-4">
@@ -237,18 +354,25 @@ function ProductEditor({ product, categories, busy, error, onClose, onSubmit }) 
                 <p className="font-circe text-[11px] font-semibold tracking-[0.14em] text-[#8A97A8] uppercase">Product details</p>
                 <p className="mt-1 font-circe text-xs text-[#7A8BA3]">These appear on the product page. Replace a photo only if it needs updating.</p>
               </div>
-              <Field label="How much to take">
-                <Input required name="howMuchToTakeText" value={fields.howMuchToTakeText} onChange={setField} placeholder="One square, then wait" />
+              <Field label="How much to take" hint={`${SECTION_HINT} The dose chart beside it is built from Dose per piece and Pieces per bar.`}>
+                <Textarea
+                  required
+                  name="howMuchToTakeText"
+                  value={fields.howMuchToTakeText}
+                  onChange={setField}
+                  className="min-h-40"
+                  placeholder={'Microdose (50mg to 250mg)\nThis sub-perceptual amount is designed to work in the background.\n\nHalf dose (500mg to 1g)\nA subtle but noticeable body high.'}
+                />
               </Field>
-              <ImageField
-                label="How much photo"
-                hint={isEdit ? 'Optional replace' : 'Required'}
-                file={files.howMuchToTakeImage}
-                existingUrl={images.howMuchToTakeImage}
-                onChange={(file) => setFile('howMuchToTakeImage', file)}
-              />
-              <Field label="Where to use">
-                <Input required name="whereToTakeText" value={fields.whereToTakeText} onChange={setField} placeholder="Evening, with tea" />
+              <Field label="Where to use" hint={SECTION_HINT}>
+                <Textarea
+                  required
+                  name="whereToTakeText"
+                  value={fields.whereToTakeText}
+                  onChange={setField}
+                  className="min-h-32"
+                  placeholder={'At home\nSomewhere quiet and familiar, with a friend nearby.\n\nOutdoors\nA calm park or trail on a clear day.'}
+                />
               </Field>
               <ImageField
                 label="Where photo"
@@ -257,8 +381,15 @@ function ProductEditor({ product, categories, busy, error, onClose, onSubmit }) 
                 existingUrl={images.whereToTakeImage}
                 onChange={(file) => setFile('whereToTakeImage', file)}
               />
-              <Field label="Ingredients">
-                <Input required name="ingredientsText" value={fields.ingredientsText} onChange={setField} placeholder="Cacao, blueberry" />
+              <Field label="Ingredients" hint={SECTION_HINT}>
+                <Textarea
+                  required
+                  name="ingredientsText"
+                  value={fields.ingredientsText}
+                  onChange={setField}
+                  className="min-h-32"
+                  placeholder={'Chocolate\nSingle-origin cacao, raw cane sugar.\n\nMushrooms\n3g dried psilocybe cubensis per bar.'}
+                />
               </Field>
               <ImageField
                 label="Ingredients photo"
