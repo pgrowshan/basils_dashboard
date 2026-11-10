@@ -15,15 +15,13 @@ const SHORT_STATUS = {
 export function StatusDonut({ slices }) {
   const total = slices.reduce((sum, slice) => sum + slice.count, 0);
   const ringTotal = total || 1;
-  let offset = 0;
   const rings = slices
     .filter((slice) => slice.count > 0)
-    .map((slice) => {
-      const length = (slice.count / ringTotal) * CIRCUMFERENCE;
-      const item = { ...slice, length, offset };
-      offset += length;
-      return item;
-    });
+    .reduce((items, slice) => {
+      const previous = items[items.length - 1];
+      const offset = previous ? previous.offset + previous.length : 0;
+      return [...items, { ...slice, length: (slice.count / ringTotal) * CIRCUMFERENCE, offset }];
+    }, []);
 
   return (
     <Card className="flex h-full flex-col">

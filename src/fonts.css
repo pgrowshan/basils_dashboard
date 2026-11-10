@@ -1,6 +1,6 @@
 @font-face {
   font-family: "circe";
-  src: url("./assets/fonts/Circe-Regular.otf") format("opentype");
+  src: url("./assets/fonts/Circe-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -8,7 +8,7 @@
 
 @font-face {
   font-family: "circe";
-  src: url("./assets/fonts/Circe-Bold.ttf") format("truetype");
+  src: url("./assets/fonts/Circe-Bold.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -16,23 +16,23 @@
 
 @font-face {
   font-family: "gelica";
-  src: url("./assets/fonts/Gelica-ExtraLight.otf") format("opentype");
-  font-weight: 250;
+  src: url("./assets/fonts/Gelica-ExtraLight.woff2") format("woff2");
+  font-weight: 200;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: "gelica";
-  src: url("./assets/fonts/Gelica-ExtraLightItalic.otf") format("opentype");
-  font-weight: 250;
+  src: url("./assets/fonts/Gelica-ExtraLightItalic.woff2") format("woff2");
+  font-weight: 200;
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
   font-family: "gelica";
-  src: url("./assets/fonts/Gelica-Light.otf") format("opentype");
+  src: url("./assets/fonts/Gelica-Light.woff2") format("woff2");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -40,7 +40,7 @@
 
 @font-face {
   font-family: "gelica";
-  src: url("./assets/fonts/Gelica-LightItalic.otf") format("opentype");
+  src: url("./assets/fonts/Gelica-LightItalic.woff2") format("woff2");
   font-weight: 300;
   font-style: italic;
   font-display: swap;
@@ -48,7 +48,7 @@
 
 @font-face {
   font-family: "gelica";
-  src: url("./assets/fonts/Gelica-Regular.otf") format("opentype");
+  src: url("./assets/fonts/Gelica-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -56,7 +56,7 @@
 
 @font-face {
   font-family: "gelica";
-  src: url("./assets/fonts/Gelica-Italic.otf") format("opentype");
+  src: url("./assets/fonts/Gelica-Italic.woff2") format("woff2");
   font-weight: 400;
   font-style: italic;
   font-display: swap;
@@ -64,7 +64,7 @@
 
 @font-face {
   font-family: "gelica";
-  src: url("./assets/fonts/Gelica-Medium.otf") format("opentype");
+  src: url("./assets/fonts/Gelica-Medium.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -72,7 +72,7 @@
 
 @font-face {
   font-family: "gelica";
-  src: url("./assets/fonts/Gelica-MediumItalic.otf") format("opentype");
+  src: url("./assets/fonts/Gelica-MediumItalic.woff2") format("woff2");
   font-weight: 500;
   font-style: italic;
   font-display: swap;
@@ -80,7 +80,7 @@
 
 @font-face {
   font-family: "gelica";
-  src: url("./assets/fonts/Gelica-SemiBold.otf") format("opentype");
+  src: url("./assets/fonts/Gelica-SemiBold.woff2") format("woff2");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -88,7 +88,7 @@
 
 @font-face {
   font-family: "gelica";
-  src: url("./assets/fonts/Gelica-SemiBoldItalic.otf") format("opentype");
+  src: url("./assets/fonts/Gelica-SemiBoldItalic.woff2") format("woff2");
   font-weight: 600;
   font-style: italic;
   font-display: swap;
@@ -96,7 +96,7 @@
 
 @font-face {
   font-family: "gelica";
-  src: url("./assets/fonts/Gelica-Bold.otf") format("opentype");
+  src: url("./assets/fonts/Gelica-Bold.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -104,7 +104,7 @@
 
 @font-face {
   font-family: "gelica";
-  src: url("./assets/fonts/Gelica-BoldItalic.otf") format("opentype");
+  src: url("./assets/fonts/Gelica-BoldItalic.woff2") format("woff2");
   font-weight: 700;
   font-style: italic;
   font-display: swap;
@@ -112,16 +112,16 @@
 
 @font-face {
   font-family: "gelica";
-  src: url("./assets/fonts/Gelica-Black.otf") format("opentype");
-  font-weight: 800;
+  src: url("./assets/fonts/Gelica-Black.woff2") format("woff2");
+  font-weight: 900;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: "gelica";
-  src: url("./assets/fonts/Gelica-BlackItalic.otf") format("opentype");
-  font-weight: 800;
+  src: url("./assets/fonts/Gelica-BlackItalic.woff2") format("woff2");
+  font-weight: 900;
   font-style: italic;
   font-display: swap;
 }

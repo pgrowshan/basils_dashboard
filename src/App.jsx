@@ -7,6 +7,7 @@ import ProductsPage from "./admin/ProductsPage";
 import OrdersPage from "./admin/OrdersPage";
 import PromosPage from "./admin/PromosPage";
 import SpecialOfferPage from "./admin/SpecialOfferPage";
+import ShippingPage from "./admin/ShippingPage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/orders" element={<OrdersPage />} />
         <Route path="/promos" element={<PromosPage />} />
         <Route path="/special-offer" element={<SpecialOfferPage />} />
+        <Route path="/shipping" element={<ShippingPage />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

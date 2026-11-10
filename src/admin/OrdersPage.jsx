@@ -107,10 +107,13 @@ export default function OrdersPage() {
     return () => clearTimeout(timer);
   }, [search]);
 
-  useEffect(() => {
+  const viewKey = `${filter}|${range}|${q}`;
+  const [lastViewKey, setLastViewKey] = useState(viewKey);
+  if (lastViewKey !== viewKey) {
+    setLastViewKey(viewKey);
     setPage(1);
     setSelected([]);
-  }, [filter, range, q]);
+  }
 
   const params = { page, limit: 25, filter, q, range };
   const { data, isLoading, isError, error, isFetching } = useGetOrders(params);

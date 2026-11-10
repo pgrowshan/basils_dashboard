@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { apiPrivate } from '../lib/api-client.js';
 import { useGetProducts } from '../hooks/product/useGetProducts.js';
@@ -25,9 +25,10 @@ export default function SpecialOfferPage() {
     compareAtPrice: '',
   });
 
-  useEffect(() => {
-    const offer = offerQuery.data;
-    if (!offer) return;
+  const [syncedOffer, setSyncedOffer] = useState(null);
+  const offer = offerQuery.data;
+  if (offer && offer !== syncedOffer) {
+    setSyncedOffer(offer);
     setForm({
       enabled: Boolean(offer.enabled),
       title: offer.title || 'Special Offer',
@@ -35,7 +36,7 @@ export default function SpecialOfferPage() {
       offerPrice: offer.offerPrice ? String(offer.offerPrice) : '',
       compareAtPrice: offer.compareAtPrice ? String(offer.compareAtPrice) : '',
     });
-  }, [offerQuery.data]);
+  }
 
   const saveOffer = useMutation({
     mutationFn: async (payload) => {

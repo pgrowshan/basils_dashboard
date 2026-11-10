@@ -104,17 +104,7 @@ function ConfirmDialog({ title, body, confirmLabel, busy, onClose, onConfirm }) 
 }
 
 function ImageField({ label, hint, file, existingUrl, onChange }) {
-  const [preview, setPreview] = useState(existingUrl || '');
-
-  useEffect(() => {
-    if (!file) {
-      setPreview(existingUrl || '');
-      return undefined;
-    }
-    const url = URL.createObjectURL(file);
-    setPreview(url);
-    return () => URL.revokeObjectURL(url);
-  }, [file, existingUrl]);
+  const preview = Boolean(file || existingUrl);
 
   return (
     <div>
@@ -123,8 +113,10 @@ function ImageField({ label, hint, file, existingUrl, onChange }) {
       </span>
       <div className="flex items-center gap-3 rounded-xl border border-[#D7DEE8] bg-[#FBF9F4] p-2.5">
         <div className="h-16 w-16 shrink-0 overflow-hidden rounded-lg bg-[#EFEBE3]">
-          {preview ? (
-            <img src={preview} alt="" className="h-full w-full object-cover" />
+          {file ? (
+            <FilePreview file={file} className="h-full w-full object-cover" />
+          ) : existingUrl ? (
+            <img src={existingUrl} alt="" className="h-full w-full object-cover" />
           ) : (
             <div className="flex h-full items-center justify-center font-circe text-[10px] text-[#8A97A8]">Photo</div>
           )}
@@ -149,15 +141,16 @@ function ImageField({ label, hint, file, existingUrl, onChange }) {
 }
 
 function FilePreview({ file, className }) {
-  const [url, setUrl] = useState('');
+  const [preview, setPreview] = useState({ file: null, url: '' });
 
   useEffect(() => {
-    const objectUrl = URL.createObjectURL(file);
-    setUrl(objectUrl);
-    return () => URL.revokeObjectURL(objectUrl);
+    const reader = new FileReader();
+    reader.onload = () => setPreview({ file, url: String(reader.result || '') });
+    reader.readAsDataURL(file);
+    return () => reader.abort();
   }, [file]);
 
-  return url ? <img src={url} alt="" className={className} /> : null;
+  return preview.file === file && preview.url ? <img src={preview.url} alt="" className={className} /> : null;
 }
 
 function PhotoTile({ cover, onRemove, children }) {
@@ -433,9 +426,12 @@ export default function ProductsPage() {
     return () => clearTimeout(timer);
   }, [search]);
 
-  useEffect(() => {
+  const viewKey = `${q}|${categoryId}`;
+  const [lastViewKey, setLastViewKey] = useState(viewKey);
+  if (lastViewKey !== viewKey) {
+    setLastViewKey(viewKey);
     setPage(1);
-  }, [q, categoryId]);
+  }
 
   useEffect(() => {
     document.body.style.overflow = editor || pendingDelete ? 'hidden' : '';

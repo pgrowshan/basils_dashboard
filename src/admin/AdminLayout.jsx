@@ -24,6 +24,9 @@ function Icon({ name }) {
     offer: (
       <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v5l3 2m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
     ),
+    shipping: (
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3 7h11v9H3V7zm11 3h4l3 3v3h-7v-6zM7 19a2 2 0 100-4 2 2 0 000 4zm10 0a2 2 0 100-4 2 2 0 000 4z" />
+    ),
   };
 
   return (
@@ -40,6 +43,7 @@ const LINKS = [
   { to: '/orders', label: 'Orders', icon: 'orders' },
   { to: '/promos', label: 'Promos', icon: 'promos' },
   { to: '/special-offer', label: 'Special offer', icon: 'offer' },
+  { to: '/shipping', label: 'Shipping rates', icon: 'shipping' },
 ];
 
 function Sidebar({ onNavigate, user }) {
@@ -96,9 +100,11 @@ export default function AdminLayout() {
     return () => window.removeEventListener('auth-change', sync);
   }, []);
 
-  useEffect(() => {
+  const [menuPath, setMenuPath] = useState(location.pathname);
+  if (menuPath !== location.pathname) {
+    setMenuPath(location.pathname);
     setOpen(false);
-  }, [location.pathname]);
+  }
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
