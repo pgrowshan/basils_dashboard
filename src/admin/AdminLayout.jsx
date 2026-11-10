@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Navigate, NavLink, Outlet, useLocation } from 'react-router-dom';
-import { clearAuthSession, getStoredUser, isAccessTokenValid } from '../lib/authSession.js';
+import { clearAuthSession, getStoredUser, hasUsableSession } from '../lib/authSession.js';
 import logoWhite from '../assets/nav/nav-logo-white.svg';
 import logoBlue from '../assets/nav/nav-logo-blue.svg';
 
@@ -89,7 +89,7 @@ export default function AdminLayout() {
   const [open, setOpen] = useState(false);
   const [, setAuthTick] = useState(0);
   const user = getStoredUser();
-  const signedIn = isAccessTokenValid() && user?.role === 'admin';
+  const signedIn = hasUsableSession() && user?.role === 'admin';
   const current = LINKS.find((link) =>
     link.end ? location.pathname === link.to : location.pathname.startsWith(link.to),
   );

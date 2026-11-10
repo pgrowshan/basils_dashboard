@@ -32,6 +32,20 @@ export function isAccessTokenValid(token = getAccessToken()) {
   return payload.exp * 1000 > Date.now() + 1000;
 }
 
+export function getRefreshToken() {
+  return localStorage.getItem(REFRESH_KEY);
+}
+
+export function hasUsableSession() {
+  return isAccessTokenValid() || isAccessTokenValid(getRefreshToken());
+}
+
+export function updateAccessToken(accessToken, user) {
+  localStorage.setItem(TOKEN_KEY, accessToken);
+  if (user) localStorage.setItem(USER_KEY, JSON.stringify(user));
+  window.dispatchEvent(new Event('auth-change'));
+}
+
 export function getStoredUser() {
   const raw = localStorage.getItem(USER_KEY);
   if (!raw) return null;
